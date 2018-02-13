@@ -24,8 +24,8 @@ coreLibrary
   })
   .then(() => {
     eventsModule.liveEventPollingInterval = coreLibrary.args.pollingInterval
-
-    const widget = new Widget(coreLibrary.args.filter, {
+    const filter = coreLibrary.args.filter // not used as we want to hardcode wc2018
+    const widget = new Widget("/football/world_cup_2018", {
       combineFilters: coreLibrary.args.combineFilters,
       eventsRefreshInterval: coreLibrary.args.eventsRefreshInterval,
       pollingCount: coreLibrary.args.pollingCount,
