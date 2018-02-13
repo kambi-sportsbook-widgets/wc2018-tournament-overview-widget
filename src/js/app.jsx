@@ -6,7 +6,6 @@ import {
 import kambi from './Services/kambi'
 import Widget from './Widget'
 
-import { supportedFilters } from './constants'
 /**
  * Removes widget on fatal errors.
  * @param {Error} error Error instance
@@ -18,28 +17,15 @@ const onFatal = function(error) {
 
 coreLibrary
   .init({
-    widgetTrackingName: 'gm-match-overview-widget',
-    compareAgainstHighlights: true,
-    filter: supportedFilters,
-    combineFilters: false,
+    filter: "/football/world_cup_2018", // need to ensure that this is not overwritten later
     pollingInterval: 30000,
     pollingCount: 4,
     eventsRefreshInterval: 120000,
   })
   .then(() => {
-    coreLibrary.widgetTrackingName = coreLibrary.args.widgetTrackingName
     eventsModule.liveEventPollingInterval = coreLibrary.args.pollingInterval
-    return coreLibrary.args.compareAgainstHighlights // set this arg to false to test specific filters
-      ? kambi.getHighlightedFilters(coreLibrary.args.filter)
-      : coreLibrary.args.filter
-  })
-  .then(filters => {
-    if (filters.length === 0) {
-      onFatal(new Error('No matching filters in highlight'))
-      return
-    }
 
-    const widget = new Widget(filters, {
+    const widget = new Widget(coreLibrary.args.filter, {
       combineFilters: coreLibrary.args.combineFilters,
       eventsRefreshInterval: coreLibrary.args.eventsRefreshInterval,
       pollingCount: coreLibrary.args.pollingCount,

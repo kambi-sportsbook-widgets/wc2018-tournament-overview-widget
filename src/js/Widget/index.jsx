@@ -47,24 +47,23 @@ const render = function() {
  */
 const refreshEvents = function() {
   return kambi
-    .getEvents(this.filters, this.combineFilters)
+    .getEvents(this.filter)
     .then(({ events, filter }) => {
       this.events = events
       this.appliedFilter = filter
 
-      // give up when there is no events
-      if (this.events.length == 0) {
-        this.onFatal(new Error('No events to show'))
-        return
-      }
+      // THIS IS ALREADY HANDLED IN getEvents METHOD
+      // // give up when there is no events
+      // if (this.events.length == 0) {
+      //   this.onFatal(new Error('No events to show'))
+      //   return
+      // }
 
       const liveEvents = this.liveEvents
-
       // no live events, schedule refresh
       if (liveEvents.length == 0) {
         setTimeout(refreshEvents.bind(this), this.eventsRefreshInterval)
       }
-
       // subscribe to notifications on live events
       live.subscribeToEvents(
         liveEvents.map(event => event.event.id),
@@ -74,9 +73,11 @@ const refreshEvents = function() {
         }, // onUpdate
         refreshEvents // onDrained
       )
-
       // render fetched events
       render.call(this)
+    })
+    .catch(err => {
+      console.error(err)
     })
 }
 
@@ -91,7 +92,7 @@ class Widget {
    * @param {function} [onFatal] Fatal error handler
    */
   constructor(
-    filters,
+    filter,
     {
       rootEl = document.getElementById('root'),
       combineFilters = false,
@@ -102,9 +103,8 @@ class Widget {
       },
     }
   ) {
-    this.filters = filters
+    this.filter = filter
     this.rootEl = rootEl
-    this.combineFilters = combineFilters
     this.eventsRefreshInterval = eventsRefreshInterval
     this.pollingCount = pollingCount
     this.onFatal = onFatal
