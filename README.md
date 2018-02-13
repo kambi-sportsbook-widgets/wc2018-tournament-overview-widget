@@ -11,8 +11,7 @@ In desktop mode the widget has clickable arrows to scroll the widget, In mobile 
 Arguments and default values:
 ```json
 "args": {
-    "filter": [],
-    "combineFilters": false,
+    "filter": 'football/world_cup_2018',
     "pollingInterval": 30000,
     "pollingCount": 4,
     "eventsRefreshInterval": 120000,
@@ -21,13 +20,12 @@ Arguments and default values:
 }
 ```
 
-1.  `filter` - Array<string> - empty for now as we should not use filters.
-2. `combineFilters` - boolean - should be false for now as we should not use filters. if true will use all the filters that are also with the highlights mixing different tournaments together
-5. `pollingInterval` - number - interval in milliseconds to get new live data from live matches
-6. `pollingCount` - number - maximum number of matches to poll for live data at the same time
-7. `eventsRefreshInterval` - number - interval in milliseconds to look for live events
-8. `widgetTrackingName` - string - tracking name for analytics purposes
-9. `compareAgainstHighlights` - boolean - determines whether you want to compare whether the filters are within the highlighted events (popular events) or not. Will use the first item in the filter that returns events.
+1.  `filter` - String - will be hardcoded to `football/world_cup_2018`
+2. `pollingInterval` - number - interval in milliseconds to get new live data from live matches
+3. `pollingCount` - number - maximum number of matches to poll for live data at the same time
+4. `eventsRefreshInterval` - number - interval in milliseconds to look for live events
+5. `widgetTrackingName` - string - tracking name for analytics purposes
+6. `compareAgainstHighlights` - boolean - determines whether you want to compare whether the filters are within the highlighted events (popular events) or not. Will use the first item in the filter that returns events.
 
 ### Build Instructions
 
