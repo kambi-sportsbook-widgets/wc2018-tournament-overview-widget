@@ -11,12 +11,13 @@ In desktop mode the widget has clickable arrows to scroll the widget, In mobile 
 Arguments and default values:
 ```json
 "args": {
-    "filter": 'football/world_cup_2018',
-    "pollingInterval": 30000,
-    "pollingCount": 4,
-    "eventsRefreshInterval": 120000,
-    "widgetTrackingName": "gm-match-overview-widget",
-    "compareAgainstHighlights": true,
+    filter: "/football/world_cup_2018",
+    pollingInterval: 30000,
+    pollingCount: 4,
+    eventsRefreshInterval: 120000,
+    flagBaseUrl: "",
+    backgroundUrl: "",
+    iconUrl: ""
 }
 ```
 
@@ -24,8 +25,9 @@ Arguments and default values:
 2. `pollingInterval` - number - interval in milliseconds to get new live data from live matches
 3. `pollingCount` - number - maximum number of matches to poll for live data at the same time
 4. `eventsRefreshInterval` - number - interval in milliseconds to look for live events
-5. `widgetTrackingName` - string - tracking name for analytics purposes
-6. `compareAgainstHighlights` - boolean - determines whether you want to compare whether the filters are within the highlighted events (popular events) or not. Will use the first item in the filter that returns events.
+5. `flagBaseUrl` - string - base URL concatenated with lowercased englishName of the team + .svg Replace spaces with '_'
+6. `backgroundUrl` - string - the image to use as background-image
+7. `iconUrl` - string - the tournament icon URL. Should have a default if absent
 
 ### Build Instructions
 

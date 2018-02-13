@@ -17,19 +17,34 @@ const onFatal = function(error) {
 
 coreLibrary
   .init({
-    filter: "/football/world_cup_2018", // need to ensure that this is not overwritten later
+    filter: "/football/world_cup_2018",
     pollingInterval: 30000,
     pollingCount: 4,
     eventsRefreshInterval: 120000,
+    flagBaseUrl: '',
+    backgroundUrl: '',
+    iconUrl: ''
   })
   .then(() => {
-    eventsModule.liveEventPollingInterval = coreLibrary.args.pollingInterval
-    const filter = coreLibrary.args.filter // not used as we want to hardcode wc2018
+    const { 
+      filter, // filter not used as we want to hardcode wc2018
+      eventsRefreshInterval,
+      pollingCount,
+      flagBaseUrl,
+      backgroundUrl,
+      iconUrl,
+      pollingInterval
+    } = coreLibrary.args 
+
+    eventsModule.liveEventPollingInterval = pollingInterval    
     const widget = new Widget("/football/world_cup_2018", {
-      combineFilters: coreLibrary.args.combineFilters,
-      eventsRefreshInterval: coreLibrary.args.eventsRefreshInterval,
-      pollingCount: coreLibrary.args.pollingCount,
+      filter,
+      eventsRefreshInterval,
+      pollingCount,
       onFatal,
+      flagBaseUrl,
+      backgroundUrl,
+      iconUrl
     })
 
     return widget.init()

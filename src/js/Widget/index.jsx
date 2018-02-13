@@ -52,13 +52,6 @@ const refreshEvents = function() {
       this.events = events
       this.appliedFilter = filter
 
-      // THIS IS ALREADY HANDLED IN getEvents METHOD
-      // // give up when there is no events
-      // if (this.events.length == 0) {
-      //   this.onFatal(new Error('No events to show'))
-      //   return
-      // }
-
       const liveEvents = this.liveEvents
       // no live events, schedule refresh
       if (liveEvents.length == 0) {
@@ -114,7 +107,7 @@ class Widget {
   }
 
   init() {
-    widgetModule.setWidgetHeight(150)
+    widgetModule.setWidgetHeight(300)
     return refreshEvents.call(this)
   }
 
