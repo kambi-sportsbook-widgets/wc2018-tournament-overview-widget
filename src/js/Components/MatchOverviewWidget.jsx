@@ -59,10 +59,18 @@ class MatchOverviewWidget extends Component {
   }
 
   /**
+   * Generates country icon url
+   */
+  generateCountryFlagUrl(country) {
+    const normalisedCountryName = country.toLowerCase().replace(/\s/g, '_')
+    return `${this.props.flagBaseUrl}${normalisedCountryName}.svg`
+  }
+
+  /**
    * Renders component.
    * @returns {XML}
    */
-  render() {
+  render() {    
     return (
       <div className={styles.widget}>
         <BlendedBackground backgroundUrl={this.props.backgroundUrl} />
@@ -79,12 +87,15 @@ class MatchOverviewWidget extends Component {
           {this.props.events
             .filter(event => event.betOffers.length > 0)
             .map(event => {
+              const countries = event.event.englishName.split(' - ')
               return (
                 <Event
                   key={event.event.id}
                   event={event.event}
                   liveData={event.liveData}
                   outcomes={event.betOffers[0].outcomes}
+                  homeFlag={this.generateCountryFlagUrl(countries[0])}
+                  awayFlag={this.generateCountryFlagUrl(countries[1])}
                 />
               )
             })}
@@ -107,7 +118,8 @@ MatchOverviewWidget.propTypes = {
 
 MatchOverviewWidget.defaultProps = {
   tournamentLogo: null,
-  backgroundUrl: 'assets/overview-bw-bg-desktop.jpg'
+  backgroundUrl: 'assets/overview-bw-bg-desktop.jpg',
+  flagBaseUrl: '../../assets/icons/'
 }
 
 export default MatchOverviewWidget

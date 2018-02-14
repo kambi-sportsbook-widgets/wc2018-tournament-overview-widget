@@ -22,9 +22,9 @@ coreLibrary
     pollingInterval: 30000,
     pollingCount: 4,
     eventsRefreshInterval: 120000,
-    flagBaseUrl: '',
+    // flagBaseUrl: '',
     backgroundUrl: null,
-    iconUrl: null
+    // iconUrl: null
   })
   .then(() => {
     const { 

@@ -79,6 +79,7 @@ class Event extends Component {
     )
   }
 
+
   /**
    * Renders component.
    * @returns {XML}
@@ -87,15 +88,14 @@ class Event extends Component {
     return (
       <div className={styles.general}>
         <div className={styles.header} onClick={this.onClick}>
-          <div className={styles.group}>{this.props.event.group}</div>
           <div className={styles.start}>{this.startDate}&nbsp;</div>
         </div>
         <div className={styles.teams} onClick={this.onClick}>
           <div className={[styles.team, styles.home].join(' ')}>
-            {this.props.event.homeFlag && (
+            {this.props.homeFlag && (
               <img
                 className={styles.flag}
-                src={this.props.event.homeFlag.url}
+                src={this.props.homeFlag}
                 alt=""
               />
             )}
@@ -112,10 +112,10 @@ class Event extends Component {
 
           <div className={[styles.team, styles.away].join(' ')}>
             <span className={styles.name}>{this.props.event.awayName}</span>
-            {this.props.event.awayFlag && (
+            {this.props.awayFlag && (
               <img
                 className={styles.flag}
-                src={this.props.event.awayFlag.url}
+                src={this.props.awayFlag}
                 alt=""
               />
             )}
@@ -148,26 +148,23 @@ class Event extends Component {
   }
 }
 
+ /**
+   * event {object} contains event metadata
+   * outcomes {array} event outcomes
+   * liveData {object} live metadata
+   * flagBaseUrl {string} url path to flag icons
+   */
 Event.propTypes = {
-  /**
-   * Event object
-   */
   event: PropTypes.object.isRequired,
-
-  /**
-   * Array of outcomes
-   */
   outcomes: PropTypes.array,
-
-  /**
-   * Live data object
-   */
-  liveData: PropTypes.object,
+  liveData: PropTypes.shape(),
+  flagBaseUrl: PropTypes.string,
 }
 
 Event.defaultProps = {
   outcomes: [],
   liveData: null,
+  flagBaseUrl: 'assets/icons/'
 }
 
 export default Event

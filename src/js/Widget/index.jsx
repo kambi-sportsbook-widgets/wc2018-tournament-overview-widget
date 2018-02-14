@@ -5,11 +5,6 @@ import MatchOverviewWidget from '../Components/MatchOverviewWidget'
 import kambi from '../Services/kambi'
 import live from '../Services/live'
 
-/**
- * Rendered when combined filter is used or there is no current filter.
- * @type {string}
- */
-const DEFAULT_TOURNAMENT_LOGO = 'football'
 
 /**
  * Handles incoming event's live data update.
@@ -35,7 +30,8 @@ const render = function() {
   ReactDOM.render(
     <MatchOverviewWidget
       events={this.events}
-      tournamentLogo={this.tournamentLogo}
+      tournamentLogo={this.iconUrl}
+      flagBaseUrl={this.flagBaseUrl}
     />,
     this.rootEl
   )
@@ -94,6 +90,8 @@ class Widget {
       onFatal = e => {
         throw e
       },
+      flagBaseUrl,
+      iconUrl = '../../assets/icons/world_cup_2018'
     }
   ) {
     this.filter = filter
@@ -101,6 +99,8 @@ class Widget {
     this.eventsRefreshInterval = eventsRefreshInterval
     this.pollingCount = pollingCount
     this.onFatal = onFatal
+    this.flagBaseUrl = flagBaseUrl
+    this.iconUrl = iconUrl
 
     this.events = []
     this.appliedFilter = null
@@ -129,19 +129,6 @@ class Widget {
     }, [])
   }
 
-  /**
-   * Returns tournament logo class name based on currently applied filter.
-   * @returns {string}
-   */
-  get tournamentLogo() {
-    if (this.combineFilters) {
-      return DEFAULT_TOURNAMENT_LOGO
-    }
-
-    return this.appliedFilter
-      ? this.appliedFilter.substring(1).replace(/\//g, '-')
-      : DEFAULT_TOURNAMENT_LOGO
-  }
 }
 
 export default Widget
