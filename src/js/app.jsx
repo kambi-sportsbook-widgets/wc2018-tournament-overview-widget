@@ -22,8 +22,8 @@ coreLibrary
     pollingCount: 4,
     eventsRefreshInterval: 120000,
     flagBaseUrl: '',
-    backgroundUrl: '',
-    iconUrl: ''
+    backgroundUrl: null,
+    iconUrl: null
   })
   .then(() => {
     const { 
@@ -36,6 +36,7 @@ coreLibrary
       pollingInterval
     } = coreLibrary.args 
 
+    coreLibrary.widgetTrackingName = 'wc2018-tournament-overview'
     eventsModule.liveEventPollingInterval = pollingInterval    
     const widget = new Widget("/football/world_cup_2018", {
       filter,
