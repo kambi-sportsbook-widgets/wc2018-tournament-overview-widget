@@ -17,6 +17,7 @@ const onFatal = function(error) {
 
 coreLibrary
   .init({
+    widgetTrackingName: 'wc2018-tournament-overview',
     filter: "/football/world_cup_2018",
     pollingInterval: 30000,
     pollingCount: 4,
@@ -36,7 +37,6 @@ coreLibrary
       pollingInterval
     } = coreLibrary.args 
 
-    coreLibrary.widgetTrackingName = 'wc2018-tournament-overview'
     eventsModule.liveEventPollingInterval = pollingInterval    
     const widget = new Widget("/football/world_cup_2018", {
       filter,
