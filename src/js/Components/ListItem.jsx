@@ -47,11 +47,11 @@ class ListItem extends Component {
                 </div>
               ) : null
             }
-            <div className={styles.participant} onClick={handleClick}>
+            <span className={styles.participant} onClick={handleClick}>
               {participant}
-            </div>
+            </span>
             <div className={styles.button}>
-              <OutcomeButton outcome={outcome} label={false} />
+              <OutcomeButton outcome={outcome} label={false} outlineStyle={true} />
             </div>
          </li>
       </div>

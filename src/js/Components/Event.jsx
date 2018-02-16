@@ -128,6 +128,7 @@ class Event extends Component {
                 key={outcome.id}
                 outcome={outcome}
                 event={this.props.event}
+                outlineStyle={true}
               />
             ))}
 
@@ -140,6 +141,7 @@ class Event extends Component {
                 </span>
               }
               onClick={this.onClick}
+              outlineStyle={true}
             />
           )}
         </div>
