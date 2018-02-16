@@ -4,6 +4,7 @@ import { ScrolledList, BlendedBackground } from 'kambi-widget-components'
 
 import mobile from '../Services/mobile'
 import styles from './MatchOverviewWidget.scss'
+import { widgetModule, translationModule } from 'kambi-widget-core-library'
 
 import Event from './Event'
 import ArrowButton from './ArrowButton'
@@ -18,6 +19,7 @@ import ListItem from './ListItem'
  */
 const MOBILE_INITIAL_SCROLL_DELAY = 2000
 const WORLD_CUP_2018_ID = 2000075007
+const t = translationModule.getTranslation.bind(translationModule)
 
 class MatchOverviewWidget extends Component {
   /**
@@ -29,7 +31,8 @@ class MatchOverviewWidget extends Component {
 
     this.state = {
       selected: 0,
-      mobile: mobile()
+      mobile: mobile(),
+      widgetHeight: mobile() ? 150 : 340      
     }
     this.resize = this.onResize.bind(this)
     this.handleListItemClick = this.handleListItemClick.bind(this)
@@ -45,9 +48,12 @@ class MatchOverviewWidget extends Component {
         MOBILE_INITIAL_SCROLL_DELAY
       )
     }
+    widgetModule.setWidgetHeight(this.state.widgetHeight)
     window.addEventListener('resize', this.onResize)
-    
-    // get competitions to render by criterionId
+  }
+
+  componentDidUpdate() {
+    widgetModule.setWidgetHeight(this.state.widgetHeight)
   }
 
   /**
@@ -62,7 +68,9 @@ class MatchOverviewWidget extends Component {
    */
   onResize() {
     if (mobile() != this.state.mobile) {
-      this.setState({ mobile: !this.state.mobile })
+      this.setState({ mobile: !this.state.mobile, widgetHeight: 340 })
+    } else {
+      this.setState({ widgetHeight: 150 }) 
     }
   }
 
@@ -82,6 +90,18 @@ class MatchOverviewWidget extends Component {
     }
   }
 
+  navigateToEvent(event) {
+    if (event.event.liveBetOffers) {
+      // Navigate to live event
+      // http://kambi-sportsbook-widgets.github.io/widget-core-library/module-widgetModule.html#.navigateToLiveEvent__anchor
+      widgetModule.navigateToLiveEvent(event.event.id)
+    } else {
+      // Navigate to upcoming event
+      // http://kambi-sportsbook-widgets.github.io/widget-core-library/module-widgetModule.html#.navigateToEvent__anchor
+      widgetModule.navigateToEvent(event.event.id)
+    }
+  }
+
   generateWidgetItemTitle(event) {
     return `${event.group} - ${event.name.split('(')[0].trim()}` // e.g "WM 2018 - Skyttekung"
   }
@@ -94,7 +114,11 @@ class MatchOverviewWidget extends Component {
 
   renderTopEvent(eventData, numberOfOutcomes = 3) {
     return (
-      <List title={this.generateWidgetItemTitle(eventData.event)}>
+      <List
+        title={this.generateWidgetItemTitle(eventData.event)}
+        handleClick={() => this.navigateToEvent(eventData)}
+        navText={t('showAllParticipants', eventData.betOffers[0].outcomes.length)}
+      >
         {
           this.sortOutcomesByLowestOdds(eventData.betOffers[0].outcomes, numberOfOutcomes).map(outcome => {
             let flagUrl = null
@@ -130,13 +154,14 @@ class MatchOverviewWidget extends Component {
     return (
       <div className={styles.widget}>
         <BlendedBackground backgroundUrl={this.props.backgroundUrl} />
-
-        <div className={styles.topArea}>
-          { this.renderTopEvent(leftWidget) }
-          <TournamentLogo logoUrl={this.props.iconUrl} />
-          { this.renderTopEvent(rightWidget) }
-        </div>
-
+        {
+          !mobile() &&
+          <div className={styles.topArea}>
+            { this.renderTopEvent(leftWidget) }
+            <TournamentLogo logoUrl={this.props.iconUrl} />
+            { this.renderTopEvent(rightWidget) }
+          </div>
+        }
         <ScrolledList
           renderPrevButton={props => <ArrowButton type="left" {...props} />}
           renderNextButton={props => <ArrowButton type="right" {...props} />}
@@ -145,7 +170,7 @@ class MatchOverviewWidget extends Component {
           scrollToItemMode={ScrolledList.SCROLL_TO_ITEM_MODE.TO_LEFT}
           showControls={!mobile()}
         >
-          <TournamentLogo logoUrl={this.props.iconUrl} />
+          { mobile() && <TournamentLogo logoUrl={this.props.iconUrl} />}
           {this.props.events
             .filter(event => event.betOffers.length > 0)
             .map(event => {

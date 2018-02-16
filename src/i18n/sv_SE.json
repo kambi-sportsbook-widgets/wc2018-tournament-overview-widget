@@ -14,5 +14,8 @@
    "month10": "november",
    "month11": "december",
    "today": "Idag",
-   "tomorrow": "Imorgon"
+   "tomorrow": "Imorgon",
+   "wc2018": "WM 2018",
+   "russia": "Ryssland",
+   "showAllParticipants": "Visa alla {0} deltagare"
 }

@@ -4,6 +4,7 @@ import { widgetModule } from 'kambi-widget-core-library'
 import MatchOverviewWidget from '../Components/MatchOverviewWidget'
 import kambi from '../Services/kambi'
 import live from '../Services/live'
+import mobile from '../Services/mobile'
 
 
 /**

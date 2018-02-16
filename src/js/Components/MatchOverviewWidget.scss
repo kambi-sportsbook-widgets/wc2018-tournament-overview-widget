@@ -7,4 +7,9 @@
 
 .topArea {
    display: flex;
+   max-width: 850px;
+   min-width: 650px;
+   margin: 0 auto;
+   justify-content: space-between;
+   padding: 0 2rem;
 }
