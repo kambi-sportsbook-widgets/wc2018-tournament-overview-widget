@@ -1,18 +1,23 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { ScrolledList, BlendedBackground } from 'kambi-widget-components'
+
+import mobile from '../Services/mobile'
 import styles from './MatchOverviewWidget.scss'
+
 import Event from './Event'
 import ArrowButton from './ArrowButton'
 import ItemContainer from './ItemContainer'
 import TournamentLogo from './TournamentLogo'
-import mobile from '../Services/mobile'
+import List from './List'
+import ListItem from './ListItem'
 
 /**
  * How long (in milliseconds) to wait before scrolling league logo out
  * @type {number}
  */
 const MOBILE_INITIAL_SCROLL_DELAY = 2000
+const WORLD_CUP_2018_ID = 2000075007
 
 class MatchOverviewWidget extends Component {
   /**
@@ -27,6 +32,7 @@ class MatchOverviewWidget extends Component {
       mobile: mobile()
     }
     this.resize = this.onResize.bind(this)
+    this.handleListItemClick = this.handleListItemClick.bind(this)
   }
 
   /**
@@ -40,6 +46,8 @@ class MatchOverviewWidget extends Component {
       )
     }
     window.addEventListener('resize', this.onResize)
+    
+    // get competitions to render by criterionId
   }
 
   /**
@@ -66,15 +74,69 @@ class MatchOverviewWidget extends Component {
     return `${this.props.flagBaseUrl}${normalisedCountryName}.svg`
   }
 
+  handleListItemClick(event) {
+    if (event.event.openForLiveBetting === true) {
+      widgetModule.navigateToLiveEvent(event.event.id)
+    } else {
+      widgetModule.navigateToEvent(event.event.id)
+    }
+  }
+
+  generateWidgetItemTitle(event) {
+    return `${event.group} - ${event.name.split('(')[0].trim()}` // e.g "WM 2018 - Skyttekung"
+  }
+
+  sortOutcomesByLowestOdds(outcomes, numberItemsToReturn) {
+    return outcomes.sort((a, b) => {
+      return a.odds - b.odds
+    }).slice(0, numberItemsToReturn)
+  }
+
+  renderTopEvent(eventData, numberOfOutcomes = 3) {
+    return (
+      <List title={this.generateWidgetItemTitle(eventData.event)}>
+        {
+          this.sortOutcomesByLowestOdds(eventData.betOffers[0].outcomes, numberOfOutcomes).map(outcome => {
+            let flagUrl = null
+            const participant = outcome.label.split('(')[0]
+            const countrySplit = outcome.englishLabel.split('(')
+            
+            if (countrySplit && countrySplit.length > 1) {
+              flagUrl = this.generateCountryFlagUrl(countrySplit[1].slice(0, countrySplit[1].length -1))
+            } else if (eventData.event.groupId === WORLD_CUP_2018_ID) {
+              flagUrl = this.generateCountryFlagUrl(outcome.englishLabel)
+            }
+            return (
+              <ListItem
+                key={outcome.id}
+                participant={participant}
+                flagUrl={flagUrl}
+                outcome={outcome}
+                handleClick={() => handleListItemClick(eventData)}
+              />
+          )})
+        }            
+      </List>
+    )
+  }
+
   /**
    * Renders component.
    * @returns {XML}
    */
-  render() {    
+  render() {
+    const { leftWidget, rightWidget } = this.props.competitions
+    
     return (
       <div className={styles.widget}>
         <BlendedBackground backgroundUrl={this.props.backgroundUrl} />
-        <div style={{height: '150px'}} />
+
+        <div className={styles.topArea}>
+          { this.renderTopEvent(leftWidget) }
+          <TournamentLogo logoUrl={this.props.iconUrl} />
+          { this.renderTopEvent(rightWidget) }
+        </div>
+
         <ScrolledList
           renderPrevButton={props => <ArrowButton type="left" {...props} />}
           renderNextButton={props => <ArrowButton type="right" {...props} />}
@@ -83,7 +145,7 @@ class MatchOverviewWidget extends Component {
           scrollToItemMode={ScrolledList.SCROLL_TO_ITEM_MODE.TO_LEFT}
           showControls={!mobile()}
         >
-          <TournamentLogo logoName={this.props.tournamentLogo} />
+          <TournamentLogo logoUrl={this.props.iconUrl} />
           {this.props.events
             .filter(event => event.betOffers.length > 0)
             .map(event => {
@@ -107,11 +169,13 @@ class MatchOverviewWidget extends Component {
 
 /**
  * @property events {Array} events to display
+ * @property compentitions {Array} competitions with keys leftWidget, rightWidget containing their respective betOffers
  * @property tournamentLogo {String} tournament logo classname
  * @property backgroundUrl {String} provides path to backgroundImage
  */
 MatchOverviewWidget.propTypes = {
   events: PropTypes.arrayOf(PropTypes.object).isRequired,
+  competitions: PropTypes.shape().isRequired,
   tournamentLogo: PropTypes.string,
   backgroundUrl: PropTypes.string
 }

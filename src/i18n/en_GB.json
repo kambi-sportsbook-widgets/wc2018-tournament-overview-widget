@@ -14,5 +14,8 @@
    "month10": "November",
    "month11": "December",
    "today": "Today",
-   "tomorrow": "Tomorrow"
+   "tomorrow": "Tomorrow",
+   "wc2018": "World Cup 2018",
+   "russia": "Russia",
+   "showAllParticipants": "Show all {0} participants"
 }

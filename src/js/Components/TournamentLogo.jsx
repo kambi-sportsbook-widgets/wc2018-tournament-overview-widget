@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styles from './TournamentLogo.scss'
 
-const TournamentLogo = ({ logoName, scrolledListHasHorizontalSpaceLeft }) => {
+const TournamentLogo = ({ logoUrl, scrolledListHasHorizontalSpaceLeft }) => {
   let className = styles.general
   if (scrolledListHasHorizontalSpaceLeft) {
     className += ' ' + styles.scrolledListHasHorizontalSpaceLeft
@@ -12,7 +12,7 @@ const TournamentLogo = ({ logoName, scrolledListHasHorizontalSpaceLeft }) => {
       <i
         className="kw-custom-logo-large-type"
         style={{
-          backgroundImage: `url(assets/icons/${logoName}.svg)`,
+          backgroundImage: `url("${logoUrl}.svg")`,
         }}
       />
     </div>

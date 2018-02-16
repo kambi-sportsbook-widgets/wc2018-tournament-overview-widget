@@ -29,8 +29,9 @@ const updateLiveEventData = function(liveEventData) {
 const render = function() {
   ReactDOM.render(
     <MatchOverviewWidget
+      competitions={this.competitions}
       events={this.events}
-      tournamentLogo={this.iconUrl}
+      iconUrl={this.iconUrl}
       flagBaseUrl={this.flagBaseUrl}
     />,
     this.rootEl
@@ -44,9 +45,10 @@ const render = function() {
 const refreshEvents = function() {
   return kambi
     .getEvents(this.filter)
-    .then(({ events, filter }) => {
+    .then(({ events, competitions, filter }) => {
       this.events = events
       this.appliedFilter = filter
+      this.competitions = competitions
 
       const liveEvents = this.liveEvents
       // no live events, schedule refresh
@@ -91,7 +93,7 @@ class Widget {
         throw e
       },
       flagBaseUrl,
-      iconUrl = '../../assets/icons/world_cup_2018'
+      iconUrl = 'assets/icons/world_cup_2018'
     }
   ) {
     this.filter = filter
@@ -107,7 +109,7 @@ class Widget {
   }
 
   init() {
-    widgetModule.setWidgetHeight(300)
+    widgetModule.setWidgetHeight(340)
     return refreshEvents.call(this)
   }
 
