@@ -1,34 +1,15 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-// import { widgetModule } from 'kambi-widget-core-library'
 import { OutcomeButton } from 'kambi-widget-components'
-// import isMobile from '../Services/mobile'
 import styles from './ListItem.scss'
 
 
-/**
- * Called after switching the group.
- * @param {number} idx Group index
- */
-
 
 class ListItem extends Component {
+
   /**
-   * Constructs.
-   * @param {object} props Component properties
+   * Removes images with broken urls
    */
-  // constructor(props) {
-  //  //  super(props)
-  //  //  widgetModule.enableWidgetTransition(true)
-  // }
-
-  // /**
-  //  * Called after component mounts
-  //  */
-  // componentDidMount() {
-  //  //  widgetModule.adaptWidgetHeight()
-  // }
-
   handleBrokenUrl() {
     this.img.style.display = 'none'
   }
@@ -44,11 +25,10 @@ class ListItem extends Component {
          <li className={styles.row}>
             {
               flagUrl ? (
-                <div className={styles.flag} onClick={handleClick}>
+                <div className={styles.flag} onClick={handleClick} ref={(img) => { this.img = img }}>
                   <img
                     role="presentation"
                     src={flagUrl}
-                    ref={(img) => { this.img = img }}
                     onError={() => this.handleBrokenUrl()}
                   />
                 </div>
@@ -68,12 +48,16 @@ class ListItem extends Component {
 
 
 /**
-* BetOffer title
-* BetOffer tagline
-*/
-// ListItem.propTypes = {
-//   title: PropTypes.string.isRequired,
-//   tagline: PropTypes.string.isRequired,
-// }
+* @participant { string } the participant in the game
+* @flagUrl { string } url to the participant flag (if any, otherwise null)
+* @outcome { object } containing outcome data for bet
+* handleClick { func } action to fire when clicked
+  */
+ListItem.propTypes = {
+  participant: PropTypes.string,
+  flagUrl: PropTypes.string,
+  outcome: PropTypes.shape(),
+  handleClick: PropTypes.func()
+}
 
 export default ListItem

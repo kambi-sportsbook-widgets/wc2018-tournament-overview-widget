@@ -6,8 +6,10 @@ import {
 let GOLDEN_BOOT_ID = 2103056838
 let TOURNAMENT_WINNER = 2104459243
 
+// champions league equivalent
 // GOLDEN_BOOT_ID = 2085268871
 // TOURNAMENT_WINNER = 2084384039
+
 
 /**
  * Fetches events by supplied filter

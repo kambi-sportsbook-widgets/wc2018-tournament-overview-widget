@@ -48,6 +48,13 @@ class Event extends Component {
   }
 
   /**
+   * Removes images with broken urls
+   */
+  handleBrokenUrl(imgRef) {
+    this[imgRef].style.display = 'none'
+  }
+
+  /**
    * Formatted start date.
    * @returns {string}
    */
@@ -97,6 +104,8 @@ class Event extends Component {
                 className={styles.flag}
                 src={this.props.homeFlag}
                 alt=""
+                ref={(img) => { this.imgHome = img }}
+                onError={() => this.handleBrokenUrl('imgHome')}
               />
             )}
             <span className={styles.name}>{this.props.event.homeName}</span>
@@ -117,6 +126,8 @@ class Event extends Component {
                 className={styles.flag}
                 src={this.props.awayFlag}
                 alt=""
+                ref={(img) => { this.imgAway = img }}
+                onError={() => this.handleBrokenUrl('imgAway')}
               />
             )}
           </div>

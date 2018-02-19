@@ -2,11 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styles from './List.scss'
 
-const List = ({ children, title, navText, handleClick }) => (
+const List = ({ children, title, navText, showNavLink=false, handleClick }) => (
   <div className={styles.general}>
     <h6 className={styles.title}>{title}</h6>
     <ul>{children}</ul>
-    <p className={styles.nav} onClick={handleClick}>{navText}</p>
+    { showNavLink && <p className={styles.nav} onClick={handleClick}>{navText}</p> }    
   </div>
 )
 
@@ -18,7 +18,10 @@ const List = ({ children, title, navText, handleClick }) => (
 List.propTypes = {  
   children: PropTypes.node,
   title: PropTypes.string,
-  totalItems: PropTypes.number
+  navText: PropTypes.string,
+  showNavLink: PropTypes.bool,
+  handleClick: PropTypes.func.isRequired
 }
+
 
 export default List

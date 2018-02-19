@@ -19,6 +19,8 @@ import ListItem from './ListItem'
  */
 const MOBILE_INITIAL_SCROLL_DELAY = 2000
 const WORLD_CUP_2018_ID = 2000075007
+const WIDGET_HEIGHT_DESKTOP = 350
+const WIDGET_HEIGHT_MOBILE = 150
 const t = translationModule.getTranslation.bind(translationModule)
 
 class MatchOverviewWidget extends Component {
@@ -32,7 +34,7 @@ class MatchOverviewWidget extends Component {
     this.state = {
       selected: 0,
       mobile: mobile(),
-      widgetHeight: mobile() ? 150 : 340      
+      widgetHeight: mobile() ? WIDGET_HEIGHT_MOBILE : WIDGET_HEIGHT_DESKTOP      
     }
     this.resize = this.onResize.bind(this)
     this.handleListItemClick = this.handleListItemClick.bind(this)
@@ -68,9 +70,9 @@ class MatchOverviewWidget extends Component {
    */
   onResize() {
     if (mobile() != this.state.mobile) {
-      this.setState({ mobile: !this.state.mobile, widgetHeight: 340 })
+      this.setState({ mobile: !this.state.mobile, widgetHeight: WIDGET_HEIGHT_DESKTOP })
     } else {
-      this.setState({ widgetHeight: 150 }) 
+      this.setState({ widgetHeight: WIDGET_HEIGHT_MOBILE }) 
     }
   }
 
@@ -117,6 +119,7 @@ class MatchOverviewWidget extends Component {
       <List
         title={this.generateWidgetItemTitle(eventData.event)}
         handleClick={() => this.navigateToEvent(eventData)}
+        showNavLink={eventData.betOffers[0].outcomes.length > numberOfOutcomes}
         navText={t('showAllParticipants', eventData.betOffers[0].outcomes.length)}
       >
         {
@@ -125,10 +128,8 @@ class MatchOverviewWidget extends Component {
             const participant = outcome.label.split('(')[0]
             const countrySplit = outcome.englishLabel.split('(')
             
-            if (countrySplit && countrySplit.length > 1) {
+            if (countrySplit && countrySplit.length > 1 && eventData.event.groupId === WORLD_CUP_2018_ID) {
               flagUrl = this.generateCountryFlagUrl(countrySplit[1].slice(0, countrySplit[1].length -1))
-            } else if (eventData.event.groupId === WORLD_CUP_2018_ID) {
-              flagUrl = this.generateCountryFlagUrl(outcome.englishLabel)
             }
             return (
               <ListItem
@@ -176,14 +177,15 @@ class MatchOverviewWidget extends Component {
             .filter(event => event.betOffers.length > 0)
             .map(event => {
               const countries = event.event.englishName.split(' - ')
+              const isWorldCup = event.event.groupId === WORLD_CUP_2018_ID
               return (
                 <Event
                   key={event.event.id}
                   event={event.event}
                   liveData={event.liveData}
                   outcomes={event.betOffers[0].outcomes}
-                  homeFlag={this.generateCountryFlagUrl(countries[0])}
-                  awayFlag={this.generateCountryFlagUrl(countries[1])}
+                  homeFlag={isWorldCup ? this.generateCountryFlagUrl(countries[0]) : null}
+                  awayFlag={isWorldCup ? this.generateCountryFlagUrl(countries[1]) : null}
                 />
               )
             })}
