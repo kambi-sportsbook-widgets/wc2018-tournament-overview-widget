@@ -135,6 +135,7 @@ class MatchOverviewWidget extends Component {
                 key={outcome.id}
                 participant={participant}
                 flagUrl={flagUrl}
+                fallbackFlagUrl={'../../assets/world_cup_2018.svg'}
                 outcome={outcome}
                 handleClick={() => handleListItemClick(eventData)}
               />

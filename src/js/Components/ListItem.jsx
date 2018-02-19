@@ -29,7 +29,9 @@ class ListItem extends Component {
   //  //  widgetModule.adaptWidgetHeight()
   // }
 
-  
+  handleBrokenUrl() {
+    this.img.style.display = 'none'
+  }
 
   /**
    * Renders widget.
@@ -43,7 +45,12 @@ class ListItem extends Component {
             {
               flagUrl ? (
                 <div className={styles.flag} onClick={handleClick}>
-                  <img role="presentation" src={flagUrl} />
+                  <img
+                    role="presentation"
+                    src={flagUrl}
+                    ref={(img) => { this.img = img }}
+                    onError={() => this.handleBrokenUrl()}
+                  />
                 </div>
               ) : null
             }
