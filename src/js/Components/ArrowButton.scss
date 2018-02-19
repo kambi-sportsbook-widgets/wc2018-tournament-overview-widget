@@ -3,6 +3,7 @@
    position: absolute;
    top: -12px;
    bottom: -12px;
+   outline: none !important;
    width: 8%;
    min-width: 46px;
    border: none;
@@ -10,13 +11,22 @@
    font-size: 15px;
    font-weight: bold;
    cursor: pointer;
-   outline: none;
    padding: 0;
    transition: opacity .3s;
 
    &[disabled] {
       opacity: 0;
       cursor: default;
+   }
+
+   &:after, &:before {
+      content: "";
+      position: absolute;
+      top: 6px;
+      bottom: 0;
+      width: 150px;
+      height: 150px;
+      z-index: 1;
    }
 
    .icon {
@@ -32,15 +42,29 @@
 }
 
 .left {
-   background: linear-gradient(90deg, rgba(0, 0, 0, .9) 16px, transparent);
    left: 0;
    text-align: left;
+
+   &:after {
+      background-image: none;
+   }
+   &:before {
+      background-image: radial-gradient(ellipse 150px 135px at 0px 130px, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+      left: -20px;
+   }
 }
 
 .right {
-   background: linear-gradient(270deg, rgba(0, 0, 0, .9) 16px, transparent);
    right: 0;
    text-align: right;
+
+   &:after {
+      background-image:radial-gradient(ellipse 150px 135px at 150px 130px, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+      right: -20px;
+   }
+   &:before {
+      background-image: none;
+   }
 
    .icon {
       transform: scale(-1, 1);
