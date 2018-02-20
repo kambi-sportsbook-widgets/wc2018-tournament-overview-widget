@@ -36,7 +36,7 @@ class MatchOverviewWidget extends Component {
       mobile: mobile(),
       widgetHeight: mobile() ? WIDGET_HEIGHT_MOBILE : WIDGET_HEIGHT_DESKTOP      
     }
-    this.resize = this.onResize.bind(this)
+    
     this.handleListItemClick = this.handleListItemClick.bind(this)
   }
 
@@ -51,30 +51,12 @@ class MatchOverviewWidget extends Component {
       )
     }
     widgetModule.setWidgetHeight(this.state.widgetHeight)
-    window.addEventListener('resize', this.onResize)
   }
 
   componentDidUpdate() {
     widgetModule.setWidgetHeight(this.state.widgetHeight)
   }
 
-  /**
-   * Called just before component unmounting.
-   */
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.onResize)
-  }
-
-  /**
-   * Handles window resize.
-   */
-  onResize() {
-    if (mobile() != this.state.mobile) {
-      this.setState({ mobile: !this.state.mobile, widgetHeight: WIDGET_HEIGHT_DESKTOP })
-    } else {
-      this.setState({ widgetHeight: WIDGET_HEIGHT_MOBILE }) 
-    }
-  }
 
   /**
    * Generates country icon url

@@ -57,7 +57,7 @@ ListItem.propTypes = {
   participant: PropTypes.string,
   flagUrl: PropTypes.string,
   outcome: PropTypes.shape(),
-  handleClick: PropTypes.func()
+  handleClick: PropTypes.func
 }
 
 export default ListItem
