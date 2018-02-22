@@ -38,7 +38,7 @@ coreLibrary
     } = coreLibrary.args 
 
     eventsModule.liveEventPollingInterval = pollingInterval    
-    const widget = new Widget("/football/world_cup_2018", {
+    const widget = new Widget(filter, {
       eventsRefreshInterval,
       pollingCount,
       onFatal,

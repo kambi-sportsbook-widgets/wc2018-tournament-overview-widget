@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { ScrolledList, BlendedBackground } from 'kambi-widget-components'
 
 import mobile from '../Services/mobile'
-import styles from './MatchOverviewWidget.scss'
+import styles from './TournamentOverviewWidget.scss'
 import { widgetModule, translationModule } from 'kambi-widget-core-library'
 
 import Event from './Event'
@@ -21,9 +21,12 @@ const MOBILE_INITIAL_SCROLL_DELAY = 2000
 const WORLD_CUP_2018_ID = 2000075007
 const WIDGET_HEIGHT_DESKTOP = 350
 const WIDGET_HEIGHT_MOBILE = 150
+const DEFAULT_BACKGROUND = 'assets/overview-bw-bg-desktop.jpg'
+// const DEFAULT_BACKGROUND = '../../assets/overview-bw-bg-desktop.jpg'
+
 const t = translationModule.getTranslation.bind(translationModule)
 
-class MatchOverviewWidget extends Component {
+class TournamentOverviewWidget extends Component {
   /**
    * Constructs.
    * @param {object} props Component properties
@@ -34,7 +37,9 @@ class MatchOverviewWidget extends Component {
     this.state = {
       selected: 0,
       mobile: mobile(),
-      widgetHeight: mobile() ? WIDGET_HEIGHT_MOBILE : WIDGET_HEIGHT_DESKTOP      
+      widgetHeight: mobile() ? WIDGET_HEIGHT_MOBILE : WIDGET_HEIGHT_DESKTOP,
+      usingDefaultBackground: props.backgroundUrl === DEFAULT_BACKGROUND
+      // usingDefaultBackground: false
     }
     
     this.handleListItemClick = this.handleListItemClick.bind(this)
@@ -112,7 +117,10 @@ class MatchOverviewWidget extends Component {
             
             if (countrySplit && countrySplit.length > 1 && eventData.event.groupId === WORLD_CUP_2018_ID) {
               flagUrl = this.generateCountryFlagUrl(countrySplit[1].slice(0, countrySplit[1].length -1))
+            } else if (eventData.event.groupId === WORLD_CUP_2018_ID) {
+              flagUrl = this.generateCountryFlagUrl(countrySplit[0])
             }
+
             return (
               <ListItem
                 key={outcome.id}
@@ -136,8 +144,8 @@ class MatchOverviewWidget extends Component {
     const { leftWidget, rightWidget } = this.props.competitions
     
     return (
-      <div className={styles.widget}>
-        <BlendedBackground backgroundUrl={this.props.backgroundUrl} />
+      <div className={[styles.widget, 'KambiWidget-primary-background-color'].join(' ')}>
+        <BlendedBackground backgroundUrl={this.props.backgroundUrl} blendWithOperatorColor={this.state.usingDefaultBackground} />
         {
           !mobile() &&
           <div className={styles.topArea}>
@@ -183,17 +191,17 @@ class MatchOverviewWidget extends Component {
  * @property tournamentLogo {String} tournament logo classname
  * @property backgroundUrl {String} provides path to backgroundImage
  */
-MatchOverviewWidget.propTypes = {
+TournamentOverviewWidget.propTypes = {
   events: PropTypes.arrayOf(PropTypes.object).isRequired,
   competitions: PropTypes.shape().isRequired,
   tournamentLogo: PropTypes.string,
   backgroundUrl: PropTypes.string
 }
 
-MatchOverviewWidget.defaultProps = {
+TournamentOverviewWidget.defaultProps = {
   tournamentLogo: null,
-  backgroundUrl: 'assets/overview-bw-bg-desktop.jpg',
+  backgroundUrl: DEFAULT_BACKGROUND,
   flagBaseUrl: '../../assets/icons/'
 }
 
-export default MatchOverviewWidget
+export default TournamentOverviewWidget

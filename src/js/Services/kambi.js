@@ -3,8 +3,17 @@ import {
   widgetModule,
 } from 'kambi-widget-core-library'
 
-let GOLDEN_BOOT_ID = 2103056838
-let TOURNAMENT_WINNER = 2104459243
+// golden boot
+let rightWidgetInput = {
+  eventId: 1004514530,
+  criterionId: 1001868386,
+}
+
+// tournament winner
+let leftWidgetInput = {
+  eventId: 1002163009,
+  criterionId: 1004240929
+}
 
 // champions league equivalent
 // GOLDEN_BOOT_ID = 2085268871
@@ -36,10 +45,16 @@ const getEventsProgressively = function(filter) {
       let rightWidget
       tournamentCompetitions.forEach(competition => {
         competition.betOffers.forEach(betOffer => {
-          if (betOffer.id === TOURNAMENT_WINNER) {
-            leftWidget = competition
-          } else if (betOffer.id === GOLDEN_BOOT_ID) {
-            rightWidget = competition
+          if (competition.event.id === leftWidgetInput.eventId) {
+            if (betOffer.criterion.id === leftWidgetInput.criterionId) {
+              leftWidget = competition
+            }
+            return
+          } else if (competition.event.id === rightWidgetInput.eventId) {
+            if (betOffer.criterion.id === rightWidgetInput.criterionId) {
+              rightWidget = competition
+            }
+            return
           }
           return
         })

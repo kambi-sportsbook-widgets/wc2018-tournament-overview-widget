@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { widgetModule } from 'kambi-widget-core-library'
-import MatchOverviewWidget from '../Components/MatchOverviewWidget'
+import TournamentOverviewWidget from '../Components/TournamentOverviewWidget'
 import kambi from '../Services/kambi'
 import live from '../Services/live'
 import mobile from '../Services/mobile'
@@ -29,7 +29,7 @@ const updateLiveEventData = function(liveEventData) {
  */
 const render = function() {
   ReactDOM.render(
-    <MatchOverviewWidget
+    <TournamentOverviewWidget
       competitions={this.competitions}
       events={this.events}
       iconUrl={this.iconUrl}
