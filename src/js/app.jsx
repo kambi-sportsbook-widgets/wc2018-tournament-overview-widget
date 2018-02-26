@@ -17,23 +17,18 @@ const onFatal = function(error) {
 
 coreLibrary
   .init({
-    widgetTrackingName: 'wc2018-tournament-overview',
+    widgetTrackingName: 'wc2018-tournament-overview', // sets widget tracking name automatically by kambi when passed as arg
     filter: "/football/world_cup_2018",
     pollingInterval: 30000,
     pollingCount: 4,
     eventsRefreshInterval: 120000,
-    // flagBaseUrl: '',
-    backgroundUrl: null,
-    // iconUrl: null
   })
   .then(() => {
     const { 
-      filter, // filter not used as we want to hardcode wc2018
+      filter, 
       eventsRefreshInterval,
       pollingCount,
-      flagBaseUrl,
       backgroundUrl,
-      iconUrl,
       pollingInterval
     } = coreLibrary.args 
 
@@ -42,9 +37,7 @@ coreLibrary
       eventsRefreshInterval,
       pollingCount,
       onFatal,
-      flagBaseUrl,
       backgroundUrl,
-      iconUrl
     })
 
     return widget.init()

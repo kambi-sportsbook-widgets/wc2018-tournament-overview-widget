@@ -19,13 +19,13 @@ class ListItem extends Component {
    * @returns {XML}
    */
   render() {
-   const { participant, flagUrl, outcome, handleClick } = this.props
+   const { participant, flagUrl, outcome } = this.props
     return (
       <div>
          <li className={styles.row}>
             {
               flagUrl ? (
-                <div className={styles.flag} onClick={handleClick} ref={(img) => { this.img = img }}>
+                <div className={styles.flag} ref={(img) => { this.img = img }}>
                   <img
                     role="presentation"
                     src={flagUrl}
@@ -34,7 +34,7 @@ class ListItem extends Component {
                 </div>
               ) : null
             }
-            <span className={styles.participant} onClick={handleClick}>
+            <span className={styles.participant}>
               {participant}
             </span>
             <div className={styles.button}>
@@ -51,13 +51,11 @@ class ListItem extends Component {
 * @participant { string } the participant in the game
 * @flagUrl { string } url to the participant flag (if any, otherwise null)
 * @outcome { object } containing outcome data for bet
-* handleClick { func } action to fire when clicked
   */
 ListItem.propTypes = {
   participant: PropTypes.string,
   flagUrl: PropTypes.string,
-  outcome: PropTypes.shape(),
-  handleClick: PropTypes.func
+  outcome: PropTypes.shape()
 }
 
 export default ListItem

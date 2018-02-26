@@ -15,11 +15,6 @@ let leftWidgetInput = {
   criterionId: 1004240929
 }
 
-// champions league equivalent
-// GOLDEN_BOOT_ID = 2085268871
-// TOURNAMENT_WINNER = 2084384039
-
-
 /**
  * Fetches events by supplied filter
  * @param {String} filters Filters to check

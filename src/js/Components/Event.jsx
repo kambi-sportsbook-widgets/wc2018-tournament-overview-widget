@@ -37,7 +37,7 @@ class Event extends Component {
   }
 
   /**
-   * Handles click on event box.
+   * Navigates to event page
    */
   onClick() {
     if (this.props.event.openForLiveBetting === true) {
@@ -143,7 +143,8 @@ class Event extends Component {
               />
             ))}
 
-          {this.props.liveData && (
+          {
+            this.props.liveData && (
             <OutcomeButtonUI
               label={
                 <span className={styles.liveLabel}>

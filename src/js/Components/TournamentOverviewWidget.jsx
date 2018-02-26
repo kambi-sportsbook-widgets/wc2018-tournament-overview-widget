@@ -22,7 +22,6 @@ const WORLD_CUP_2018_ID = 2000075007
 const WIDGET_HEIGHT_DESKTOP = 350
 const WIDGET_HEIGHT_MOBILE = 150
 const DEFAULT_BACKGROUND = 'assets/overview-bw-bg-desktop.jpg'
-// const DEFAULT_BACKGROUND = '../../assets/overview-bw-bg-desktop.jpg'
 
 const t = translationModule.getTranslation.bind(translationModule)
 
@@ -39,10 +38,7 @@ class TournamentOverviewWidget extends Component {
       mobile: mobile(),
       widgetHeight: mobile() ? WIDGET_HEIGHT_MOBILE : WIDGET_HEIGHT_DESKTOP,
       usingDefaultBackground: props.backgroundUrl === DEFAULT_BACKGROUND
-      // usingDefaultBackground: false
     }
-    
-    this.handleListItemClick = this.handleListItemClick.bind(this)
   }
 
   /**
@@ -65,20 +61,17 @@ class TournamentOverviewWidget extends Component {
 
   /**
    * Generates country icon url
+   * country { string } country name e.g 'Sweden', 'South Korea'
    */
   generateCountryFlagUrl(country) {
     const normalisedCountryName = country.toLowerCase().replace(/\s/g, '_')
     return `${this.props.flagBaseUrl}${normalisedCountryName}.svg`
   }
 
-  handleListItemClick(event) {
-    if (event.event.openForLiveBetting === true) {
-      widgetModule.navigateToLiveEvent(event.event.id)
-    } else {
-      widgetModule.navigateToEvent(event.event.id)
-    }
-  }
-
+  /**
+   * Navigates to event
+   * event { shape } event containing betOffer and event metadata
+   */
   navigateToEvent(event) {
     if (event.event.liveBetOffers) {
       // Navigate to live event
@@ -91,16 +84,29 @@ class TournamentOverviewWidget extends Component {
     }
   }
 
+  /**
+   * Generates title for each widget item from event name
+   * event { shape } contains event metadata
+   */
   generateWidgetItemTitle(event) {
     return `${event.group} - ${event.name.split('(')[0].trim()}` // e.g "WM 2018 - Skyttekung"
   }
 
-  sortOutcomesByLowestOdds(outcomes, numberItemsToReturn) {
+  /**
+   * Sorts outcomes by lowest odds
+   * outcomes { array } outcomes to sort
+   */
+  sortOutcomesByLowestOdds(outcomes) {
     return outcomes.sort((a, b) => {
       return a.odds - b.odds
-    }).slice(0, numberItemsToReturn)
+    })
   }
 
+  /**
+   * Returns event node to display at top of widget
+   * eventData { shape } eventData object containing betOffer and event metadata
+   * numberOfOutcomes { number } how many outcomes we want the widget to render
+   */
   renderTopEvent(eventData, numberOfOutcomes = 3) {
     return (
       <List
@@ -110,26 +116,27 @@ class TournamentOverviewWidget extends Component {
         navText={t('showAllParticipants', eventData.betOffers[0].outcomes.length)}
       >
         {
-          this.sortOutcomesByLowestOdds(eventData.betOffers[0].outcomes, numberOfOutcomes).map(outcome => {
-            let flagUrl = null
-            const participant = outcome.label.split('(')[0]
-            const countrySplit = outcome.englishLabel.split('(')
-            
-            if (countrySplit && countrySplit.length > 1 && eventData.event.groupId === WORLD_CUP_2018_ID) {
-              flagUrl = this.generateCountryFlagUrl(countrySplit[1].slice(0, countrySplit[1].length -1))
-            } else if (eventData.event.groupId === WORLD_CUP_2018_ID) {
-              flagUrl = this.generateCountryFlagUrl(countrySplit[0])
-            }
+          this.sortOutcomesByLowestOdds(eventData.betOffers[0].outcomes, numberOfOutcomes)
+            .slice(0, numberOfOutcomes)
+            .map(outcome => {
+              let flagUrl = null
+              const participant = outcome.label.split('(')[0]
+              const countrySplit = outcome.englishLabel.split('(')
+              
+              if (countrySplit && countrySplit.length > 1 && eventData.event.groupId === WORLD_CUP_2018_ID) {
+                flagUrl = this.generateCountryFlagUrl(countrySplit[1].slice(0, countrySplit[1].length -1))
+              } else if (eventData.event.groupId === WORLD_CUP_2018_ID) {
+                flagUrl = this.generateCountryFlagUrl(countrySplit[0])
+              }
 
-            return (
-              <ListItem
-                key={outcome.id}
-                participant={participant}
-                flagUrl={flagUrl}
-                fallbackFlagUrl={'../../assets/world_cup_2018.svg'}
-                outcome={outcome}
-                handleClick={() => handleListItemClick(eventData)}
-              />
+              return (
+                <ListItem
+                  key={outcome.id}
+                  participant={participant}
+                  flagUrl={flagUrl}
+                  fallbackFlagUrl={'../../assets/world_cup_2018.svg'}
+                  outcome={outcome}
+                />
           )})
         }            
       </List>
@@ -186,22 +193,20 @@ class TournamentOverviewWidget extends Component {
 }
 
 /**
- * @property events {Array} events to display
+ * @property events {Array} events to display in the match overview bottom widget
  * @property compentitions {Array} competitions with keys leftWidget, rightWidget containing their respective betOffers
- * @property tournamentLogo {String} tournament logo classname
+ * @property iconUrl {String} provides full path to tournament icon svg
  * @property backgroundUrl {String} provides path to backgroundImage
  */
 TournamentOverviewWidget.propTypes = {
   events: PropTypes.arrayOf(PropTypes.object).isRequired,
   competitions: PropTypes.shape().isRequired,
-  tournamentLogo: PropTypes.string,
-  backgroundUrl: PropTypes.string
+  backgroundUrl: PropTypes.string,
+  iconUrl: PropTypes.string
 }
 
 TournamentOverviewWidget.defaultProps = {
-  tournamentLogo: null,
   backgroundUrl: DEFAULT_BACKGROUND,
-  flagBaseUrl: '../../assets/icons/'
 }
 
 export default TournamentOverviewWidget

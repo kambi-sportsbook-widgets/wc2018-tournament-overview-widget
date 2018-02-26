@@ -20,7 +20,7 @@ const TournamentLogo = ({ logoUrl, scrolledListHasHorizontalSpaceLeft }) => {
       <i
         className="kw-custom-logo-large-type"
         style={{
-          backgroundImage: `url("${logoUrl}.svg")`,
+          backgroundImage: `url("${logoUrl}")`,
         }}
       />
       <div className={styles.tournament}>

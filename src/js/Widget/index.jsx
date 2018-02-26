@@ -48,7 +48,6 @@ const refreshEvents = function() {
     .getEvents(this.filter)
     .then(({ events, competitions, filter }) => {
       this.events = events
-      this.appliedFilter = filter
       this.competitions = competitions
 
       const liveEvents = this.liveEvents
@@ -76,25 +75,21 @@ const refreshEvents = function() {
 class Widget {
   /**
    * Creates new Match Overview widget and manages its lifecycle.
-   * @param {string[]} filters Event filters list
    * @param {HTMLElement} [rootEl] Widget's mount point. Defaults to #root
-   * @param {boolean} [combineFilters=false] Should filters be combined or checked one after another
    * @param {number} [eventsRefreshInterval=120000] Interval in milliseconds to look for live events (if none are live currently)
    * @param {number} [pollingCount=4] Maximum number of concurrently watched live events
-   * @param {function} [onFatal] Fatal error handler
+   * @param {string} [backgroundUrl] Url pointing to custom background
    */
   constructor(
-    filter,
+    filter = '/football/world_cup_2018',
     {
       rootEl = document.getElementById('root'),
-      combineFilters = false,
       eventsRefreshInterval = 120000,
       pollingCount = 4,
       onFatal = e => {
         throw e
       },
-      flagBaseUrl,
-      iconUrl = 'assets/icons/world_cup_2018'
+      backgroundUrl,
     }
   ) {
     this.filter = filter
@@ -102,11 +97,11 @@ class Widget {
     this.eventsRefreshInterval = eventsRefreshInterval
     this.pollingCount = pollingCount
     this.onFatal = onFatal
-    this.flagBaseUrl = flagBaseUrl
-    this.iconUrl = iconUrl
+    this.backgroundUrl = backgroundUrl
 
+    this.iconUrl = 'assets/icons/world_cup_2018.svg'
+    this.flagBaseUrl = 'assets/icons/'
     this.events = []
-    this.appliedFilter = null
   }
 
   init() {
@@ -124,7 +119,7 @@ class Widget {
         return events
       }
 
-      if (event.event.openForLiveBetting === true) {
+      if (event.event.openForLiveBetting) {
         events.push(event)
       }
 
