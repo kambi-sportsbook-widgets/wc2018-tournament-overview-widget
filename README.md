@@ -15,19 +15,15 @@ Arguments and default values:
     pollingInterval: 30000,
     pollingCount: 4,
     eventsRefreshInterval: 120000,
-    flagBaseUrl: "",
-    backgroundUrl: "",
-    iconUrl: ""
+    backgroundUrl: "pathToDefaultBackgroundImg",
 }
 ```
 
-1.  `filter` - String - will be hardcoded to `football/world_cup_2018`
+1.  `filter` - String - currently defaults to `football/world_cup_2018`
 2. `pollingInterval` - number - interval in milliseconds to get new live data from live matches
 3. `pollingCount` - number - maximum number of matches to poll for live data at the same time
-4. `eventsRefreshInterval` - number - interval in milliseconds to look for live events
-5. `flagBaseUrl` - string - base URL concatenated with lowercased englishName of the team + .svg Replace spaces with '_'
-6. `backgroundUrl` - string - the image to use as background-image
-7. `iconUrl` - string - the tournament icon URL. Should have a default if absent
+4. `eventsRefreshInterval` - number - interval in milliseconds to look for live eventsenglishName of the team + .svg Replace spaces with '_'
+6. `backgroundUrl` - string - option to provide custom background image for widget. Otherwise, default background will be used.
 
 ### Build Instructions
 
