@@ -3,24 +3,13 @@ import {
   widgetModule,
 } from 'kambi-widget-core-library'
 
-// golden boot
-let rightWidgetInput = {
-  eventId: 1004514530,
-  criterionId: 1001868386,
-}
-
-// tournament winner
-let leftWidgetInput = {
-  eventId: 1002163009,
-  criterionId: 1004240929
-}
 
 /**
  * Fetches events by supplied filter
  * @param {String} filters Filters to check
  * @returns {Promise.<{filter: string, events: object[]}>}
  */
-const getEventsProgressively = function(filter) {
+const getEvents = (filter, leftWidgetInput, rightWidgetInput) => {
 
   const dataRequests = [
     offeringModule.getEventsByFilter(filter), // tournament matches
@@ -55,20 +44,26 @@ const getEventsProgressively = function(filter) {
         })
       })
 
-      return Promise.resolve({filter, events: tournamentEvents, competitions: {leftWidget, rightWidget}})
+      return Promise.resolve({ events: tournamentEvents, competitions: {leftWidget, rightWidget}})
     })
     .catch(err => {
-      widgetModule.removeWidget()
       Promise.reject(err)
     })
 }
 
-/**
- * Fetches events for given filter list.
- * Returns object having events array and applied filter field.
- * @param {string} filters Filters
- * @returns {Promise.<{events: object[], filter: string}>}
- */
-const getEvents = (filter) => getEventsProgressively(filter)
+export const getMatchEvents = (filter) => {
+  return offeringModule.getEventsByFilter(filter)
+    .then(tournamentData => {
+      if (tournamentData == null) {
+        throw new Error(`No tournament data available for supplied filters: ${filter}, ${filter}/all/all/competitions`)
+      }      
+
+      return Promise.resolve({ events: tournamentData.events })
+    })
+    .catch(err => {
+      Promise.reject(err)
+    })
+}
+
 
 export default { getEvents }

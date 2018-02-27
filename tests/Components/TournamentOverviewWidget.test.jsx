@@ -2,7 +2,7 @@
 import React from 'react';
 import ReactShallowRenderer from 'react-test-renderer/shallow';
 import { mount } from 'enzyme';
-import MatchOverviewWidget from '../../src/js/Components/MatchOverviewWidget';
+import TournamentOverviewWidget from '../../src/js/Components/TournamentOverviewWidget';
 
 let renderer;
 
@@ -20,7 +20,7 @@ jest.mock('../../src/js/Services/mobile', () => () => mockMobile);
 
 jest.useFakeTimers();
 
-describe('MatchOverviewWidget DOM rendering', () => {
+describe('TournamentOverviewWidget DOM rendering', () => {
 
    beforeEach(() => {
       renderer = new ReactShallowRenderer();
@@ -29,19 +29,19 @@ describe('MatchOverviewWidget DOM rendering', () => {
 
    it('renders correctly with default props', () => {
       expect(renderer.render(
-         <MatchOverviewWidget events={[]} />
+         <TournamentOverviewWidget events={[]} />
       )).toMatchSnapshot();
    });
 
    it('renders correctly with tournament logo', () => {
       expect(renderer.render(
-         <MatchOverviewWidget events={[]} tournamentLogo="test_tournament_logo" />
+         <TournamentOverviewWidget events={[]} tournamentLogo="test_tournament_logo" />
       )).toMatchSnapshot();
    });
 
    it('renders correctly with events', () => {
       expect(renderer.render(
-         <MatchOverviewWidget
+         <TournamentOverviewWidget
             events={[
                Object.assign({}, mockEvent, {event: {id: 100}}),
                Object.assign({}, mockEvent, {event: {id: 200}})
@@ -51,7 +51,7 @@ describe('MatchOverviewWidget DOM rendering', () => {
 
    it('renders correctly with events and betoffers', () => {
       expect(renderer.render(
-         <MatchOverviewWidget
+         <TournamentOverviewWidget
             events={[
                Object.assign({}, mockEvent, {event: {id: 100}, betOffers: [{outcomes: []}]}),
                Object.assign({}, mockEvent, {event: {id: 200}, betOffers: [{outcomes: []}]})
@@ -61,7 +61,7 @@ describe('MatchOverviewWidget DOM rendering', () => {
 
 });
 
-describe('MatchOverviewWidget behaviour', () => {
+describe('TournamentOverviewWidget behaviour', () => {
 
    beforeEach(() => {
       renderer = new ReactShallowRenderer();
@@ -69,7 +69,7 @@ describe('MatchOverviewWidget behaviour', () => {
 
    it('mounts correctly in desktop mode', () => {
       mockMobile = false;
-      const wrapper = mount(<MatchOverviewWidget events={[]} />);
+      const wrapper = mount(<TournamentOverviewWidget events={[]} />);
       expect(wrapper.debug()).toMatchSnapshot();
 
    });
@@ -77,7 +77,7 @@ describe('MatchOverviewWidget behaviour', () => {
    it('mounts correctly in mobile mode', () => {
       mockMobile = true;
 
-      const wrapper = mount(<MatchOverviewWidget events={[]} />);
+      const wrapper = mount(<TournamentOverviewWidget events={[]} />);
 
       expect(wrapper.debug()).toMatchSnapshot();
 
