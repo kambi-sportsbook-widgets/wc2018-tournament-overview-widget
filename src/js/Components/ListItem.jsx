@@ -19,7 +19,7 @@ class ListItem extends Component {
    * @returns {XML}
    */
   render() {
-   const { participant, flagUrl, outcome } = this.props
+   const { participant, flagUrl, outcome, event } = this.props
     return (
       <div>
          <li className={styles.row}>
@@ -38,7 +38,7 @@ class ListItem extends Component {
               {participant}
             </span>
             <div className={styles.button}>
-              <OutcomeButton outcome={outcome} label={false} outlineStyle={true} />
+              <OutcomeButton outcome={outcome} label={false} outlineStyle={true} event={event} />
             </div>
          </li>
       </div>

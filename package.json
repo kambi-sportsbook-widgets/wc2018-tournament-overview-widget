@@ -44,8 +44,8 @@
   },
   "useHttps": true,
   "dependencies": {
-    "kambi-widget-components": "1.17.3",
-    "kambi-widget-core-library": "^3.12.1",
+    "kambi-widget-components": "1.18.1",
+    "kambi-widget-core-library": "^4.0.0",
     "prop-types": "^15.4.1"
   }
 }

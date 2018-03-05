@@ -146,6 +146,7 @@ class Event extends Component {
           {
             this.props.liveData && (
             <OutcomeButtonUI
+              event={this.props.event}
               label={
                 <span className={styles.liveLabel}>
                   <em>{t('Live')}</em>

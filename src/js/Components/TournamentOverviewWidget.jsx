@@ -4,7 +4,6 @@ import { ScrolledList, BlendedBackground } from 'kambi-widget-components'
 
 import mobile from '../Services/mobile'
 import kambi from '../Services/kambi'
-import live from '../Services/live'
 import styles from './TournamentOverviewWidget.scss'
 import { widgetModule, translationModule } from 'kambi-widget-core-library'
 
@@ -63,73 +62,6 @@ class TournamentOverviewWidget extends Component {
 
 
   /**
- * Fetches events based on current filters and sets polling on the live ones.
- * @returns {Promise}
- */
-  refreshEvents = function() {
-    return kambi
-      .getMatchEvents(this.props.filter)
-      .then(({ events }) => {
-        this.setState({
-          events: events
-        })
-
-      // const liveEvents = this.liveEvents
-      // // no live events, schedule refresh
-      // if (liveEvents.length == 0) {
-      //   setTimeout(refreshEvents.bind(this), this.eventsRefreshInterval)
-      // }
-      // // subscribe to notifications on live events
-      // live.subscribeToEvents(
-      //   liveEvents.map(event => event.event.id),
-      //   liveEventData => {
-      //     updateLiveEventData.call(this, liveEventData)
-      //     render.call(this)
-      //   }, // onUpdate
-      //   refreshEvents // onDrained
-      // )
-      })
-      .catch(err => {
-        console.error(err)
-      })
-  }
-
-   /**
-   * Filters live events out of current events.
-   * @returns {object[]}
-   */
-  get liveEvents() {
-    return this.props.events.reduce((events, event) => {
-      if (events.length >= this.pollingCount) {
-        return events
-      }
-
-      if (event.event.openForLiveBetting) {
-        events.push(event)
-      }
-
-      return events
-    }, [])
-  }
-
-  /**
-   * Handles incoming event's live data update.
-   * @param {object} liveEventData Event's live data
-   */
-  updateLiveEventData(liveEventData) {
-    const event = this.state.events.find(
-      event => event.event.id == liveEventData.eventId
-    )
-
-    if (!event) {
-      console.warn(`Live event not found: ${liveEventData.eventId}`)
-      return
-    }
-
-    event.liveData = liveEventData
-  }
-
-  /**
    * Generates country icon url
    * country { string } country name e.g 'Sweden', 'South Korea'
    */
@@ -163,13 +95,22 @@ class TournamentOverviewWidget extends Component {
   }
 
   /**
-   * Sorts outcomes by lowest odds
+   * Sorts outcomes by lowest odds and label if same odds
    * outcomes { array } outcomes to sort
    */
   sortOutcomesByLowestOdds(outcomes) {
     return outcomes.sort((a, b) => {
-      return a.odds - b.odds
-    })
+      if (a.odds < b.odds) {
+        return -1;
+      } else if (a.odds === b.odds) {
+        if (a.label < b.label) {
+          return -1;
+        }
+        return 1;
+      } else if (a.odds > b.odds) {
+        return 1;
+      }
+    });
   }
 
   /**
@@ -206,6 +147,7 @@ class TournamentOverviewWidget extends Component {
                   flagUrl={flagUrl}
                   fallbackFlagUrl={'../../assets/world_cup_2018.svg'}
                   outcome={outcome}
+                  event={eventData.event}
                 />
           )})
         }            
@@ -239,7 +181,7 @@ class TournamentOverviewWidget extends Component {
           scrollToItemMode={ScrolledList.SCROLL_TO_ITEM_MODE.TO_LEFT}
           showControls={!mobile()}
         >
-          { mobile() && <TournamentLogo logoUrl={this.props.iconUrl} />}
+          {/* { mobile() && <TournamentLogo logoUrl={this.props.iconUrl} />} */}
           {this.state.events
             .filter(event => event.betOffers.length > 0)
             .map(event => {

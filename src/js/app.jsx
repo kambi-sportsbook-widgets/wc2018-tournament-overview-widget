@@ -53,7 +53,7 @@ coreLibrary
       pollingInterval
     } = coreLibrary.args
 
-    eventsModule.liveEventPollingInterval = pollingInterval    
+    eventsModule.liveEventPollingInterval = pollingInterval
     ReactDOM.render(
       <TournamentOverviewWidget
         competitions={competitions}
