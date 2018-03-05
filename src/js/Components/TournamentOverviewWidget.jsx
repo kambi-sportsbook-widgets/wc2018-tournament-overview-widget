@@ -155,6 +155,39 @@ class TournamentOverviewWidget extends Component {
     )
   }
 
+  renderMatchEvents() {
+    return this.state.events
+      .filter(event => event.betOffers.length > 0)
+      .map(event => {
+        const countries = event.event.englishName.split(' - ')
+        const isWorldCup = event.event.groupId === WORLD_CUP_2018_ID
+        return (
+          <Event
+            key={event.event.id}
+            event={event.event}
+            liveData={event.liveData}
+            outcomes={event.betOffers[0].outcomes}
+            homeFlag={isWorldCup ? this.generateCountryFlagUrl(countries[0]) : null}
+            awayFlag={isWorldCup ? this.generateCountryFlagUrl(countries[1]) : null}
+          />
+        )
+      })
+  }
+
+  /**
+   * renders items based on device as we cannot pass null or false to ScrolledList
+   */
+  renderScrolledListItems() {
+    let scrolledListItems = [
+      this.renderMatchEvents()
+    ]
+    if (mobile()) {
+      scrolledListItems.unshift(<TournamentLogo logoUrl={this.props.iconUrl} key='tournamentLogo' />)
+    }
+
+    return scrolledListItems.map(item => item)
+  }
+
   /**
    * Renders component.
    * @returns {XML}
@@ -181,23 +214,7 @@ class TournamentOverviewWidget extends Component {
           scrollToItemMode={ScrolledList.SCROLL_TO_ITEM_MODE.TO_LEFT}
           showControls={!mobile()}
         >
-          {/* { mobile() && <TournamentLogo logoUrl={this.props.iconUrl} />} */}
-          {this.state.events
-            .filter(event => event.betOffers.length > 0)
-            .map(event => {
-              const countries = event.event.englishName.split(' - ')
-              const isWorldCup = event.event.groupId === WORLD_CUP_2018_ID
-              return (
-                <Event
-                  key={event.event.id}
-                  event={event.event}
-                  liveData={event.liveData}
-                  outcomes={event.betOffers[0].outcomes}
-                  homeFlag={isWorldCup ? this.generateCountryFlagUrl(countries[0]) : null}
-                  awayFlag={isWorldCup ? this.generateCountryFlagUrl(countries[1]) : null}
-                />
-              )
-            })}
+          { this.renderScrolledListItems() }
         </ScrolledList>
       </div>
     )
