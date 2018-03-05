@@ -140,6 +140,7 @@ class Event extends Component {
                 outcome={outcome}
                 event={this.props.event}
                 outlineStyle={true}
+                updateOdds={false}
               />
             ))}
 
