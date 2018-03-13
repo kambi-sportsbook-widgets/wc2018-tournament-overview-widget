@@ -8,25 +8,34 @@ import {
 import kambi from './Services/kambi'
 import TournamentOverviewWidget from './Components/TournamentOverviewWidget'
 
-
 coreLibrary
   .init({
     widgetTrackingName: 'wc2018-tournament-overview', // sets widget tracking name automatically by kambi when passed as arg
-    filter: "/football/world_cup_2018",
-    iconUrl: 'assets/icons/world_cup_2018.svg',
-    flagBaseUrl: 'assets/icons/',
-    backgroundUrl: 'assets/overview-bw-bg-desktop.jpg',
+    filter: '/football/world_cup_2018',
+    iconUrl:
+      'https://d1fqgomuxh4f5p.cloudfront.net/tournamentdata/worldcup2018/icons/world_cup_2018.svg',
+    flagBaseUrl:
+      'https://d1fqgomuxh4f5p.cloudfront.net/tournamentdata/worldcup2018/icons/',
+    backgroundUrl:
+      'https://d1fqgomuxh4f5p.cloudfront.net/tournamentdata/worldcup2018/overview-bw-bg-desktop.jpg',
     pollingInterval: 30000,
     pollingCount: 4,
     eventsRefreshInterval: 120000,
-    rightWidgetInput : { // golden boot
+    rightWidgetInput: {
+      // golden boot
       eventId: 1004514530,
       criterionId: 1001868386,
     },
-    leftWidgetInput : { // tournament winner
+    leftWidgetInput: {
+      // tournament winner
       eventId: 1002163009,
-      criterionId: 1004240929
+      criterionId: 1004240929,
     },
+
+    // rightWidgetInput : { // golden ball
+    //   eventId: 1004494885,
+    //   criterionId: 1001613138,
+    // },
     // // CHAMPIONS LEAGUE
     // filter: "/football/champions_league",
     // rightWidgetInput : { // top goalscorer (no golden boot)
@@ -40,7 +49,7 @@ coreLibrary
   })
   .then(() => {
     const { filter, leftWidgetInput, rightWidgetInput } = coreLibrary.args
-    return kambi .getEvents(filter, leftWidgetInput, rightWidgetInput)
+    return kambi.getEvents(filter, leftWidgetInput, rightWidgetInput)
   })
   .then(({ events, competitions }) => {
     const {
@@ -50,7 +59,7 @@ coreLibrary
       backgroundUrl,
       eventsRefreshInterval,
       pollingCount,
-      pollingInterval
+      pollingInterval,
     } = coreLibrary.args
 
     eventsModule.liveEventPollingInterval = pollingInterval
@@ -69,6 +78,6 @@ coreLibrary
     )
   })
   .catch(err => {
-    console.error(err)    
+    console.error(err)
     widgetModule.removeWidget()
   })

@@ -22,7 +22,8 @@ const MOBILE_INITIAL_SCROLL_DELAY = 2000
 const WORLD_CUP_2018_ID = 2000075007
 const WIDGET_HEIGHT_DESKTOP = 350
 const WIDGET_HEIGHT_MOBILE = 150
-const DEFAULT_BACKGROUND = 'assets/overview-bw-bg-desktop.jpg'
+const DEFAULT_BACKGROUND =
+  'https://d1fqgomuxh4f5p.cloudfront.net/tournamentdata/worldcup2018/overview-bw-bg-desktop.jpg'
 
 const t = translationModule.getTranslation.bind(translationModule)
 
@@ -39,7 +40,7 @@ class TournamentOverviewWidget extends Component {
       selected: 0,
       mobile: mobile(),
       widgetHeight: mobile() ? WIDGET_HEIGHT_MOBILE : WIDGET_HEIGHT_DESKTOP,
-      usingDefaultBackground: props.backgroundUrl === DEFAULT_BACKGROUND
+      usingDefaultBackground: props.backgroundUrl === DEFAULT_BACKGROUND,
     }
   }
 
@@ -59,7 +60,6 @@ class TournamentOverviewWidget extends Component {
   componentDidUpdate() {
     widgetModule.setWidgetHeight(this.state.widgetHeight)
   }
-
 
   /**
    * Generates country icon url
@@ -101,16 +101,16 @@ class TournamentOverviewWidget extends Component {
   sortOutcomesByLowestOdds(outcomes) {
     return outcomes.sort((a, b) => {
       if (a.odds < b.odds) {
-        return -1;
+        return -1
       } else if (a.odds === b.odds) {
         if (a.label < b.label) {
-          return -1;
+          return -1
         }
-        return 1;
+        return 1
       } else if (a.odds > b.odds) {
-        return 1;
+        return 1
       }
-    });
+    })
   }
 
   /**
@@ -124,33 +124,44 @@ class TournamentOverviewWidget extends Component {
         title={this.generateWidgetItemTitle(eventData.event)}
         handleClick={() => this.navigateToEvent(eventData)}
         showNavLink={eventData.betOffers[0].outcomes.length > numberOfOutcomes}
-        navText={t('showAllParticipants', eventData.betOffers[0].outcomes.length)}
+        navText={t(
+          'showAllParticipants',
+          eventData.betOffers[0].outcomes.length
+        )}
       >
-        {
-          this.sortOutcomesByLowestOdds(eventData.betOffers[0].outcomes, numberOfOutcomes)
-            .slice(0, numberOfOutcomes)
-            .map(outcome => {
-              let flagUrl = null
-              const participant = outcome.label.split('(')[0]
-              const countrySplit = outcome.englishLabel.split('(')
-              
-              if (countrySplit && countrySplit.length > 1 && eventData.event.groupId === WORLD_CUP_2018_ID) {
-                flagUrl = this.generateCountryFlagUrl(countrySplit[1].slice(0, countrySplit[1].length -1))
-              } else if (eventData.event.groupId === WORLD_CUP_2018_ID) {
-                flagUrl = this.generateCountryFlagUrl(countrySplit[0])
-              }
+        {this.sortOutcomesByLowestOdds(
+          eventData.betOffers[0].outcomes,
+          numberOfOutcomes
+        )
+          .slice(0, numberOfOutcomes)
+          .map(outcome => {
+            let flagUrl = null
+            const participant = outcome.label.split('(')[0]
+            const countrySplit = outcome.englishLabel.split('(')
 
-              return (
-                <ListItem
-                  key={outcome.id}
-                  participant={participant}
-                  flagUrl={flagUrl}
-                  fallbackFlagUrl={'../../assets/world_cup_2018.svg'}
-                  outcome={outcome}
-                  event={eventData.event}
-                />
-          )})
-        }            
+            if (
+              countrySplit &&
+              countrySplit.length > 1 &&
+              eventData.event.groupId === WORLD_CUP_2018_ID
+            ) {
+              flagUrl = this.generateCountryFlagUrl(
+                countrySplit[1].slice(0, countrySplit[1].length - 1)
+              )
+            } else if (eventData.event.groupId === WORLD_CUP_2018_ID) {
+              flagUrl = this.generateCountryFlagUrl(countrySplit[0])
+            }
+
+            return (
+              <ListItem
+                key={outcome.id}
+                participant={participant}
+                flagUrl={flagUrl}
+                fallbackFlagUrl={'../../assets/world_cup_2018.svg'}
+                outcome={outcome}
+                event={eventData.event}
+              />
+            )
+          })}
       </List>
     )
   }
@@ -167,8 +178,12 @@ class TournamentOverviewWidget extends Component {
             event={event.event}
             liveData={event.liveData}
             outcomes={event.betOffers[0].outcomes}
-            homeFlag={isWorldCup ? this.generateCountryFlagUrl(countries[0]) : null}
-            awayFlag={isWorldCup ? this.generateCountryFlagUrl(countries[1]) : null}
+            homeFlag={
+              isWorldCup ? this.generateCountryFlagUrl(countries[0]) : null
+            }
+            awayFlag={
+              isWorldCup ? this.generateCountryFlagUrl(countries[1]) : null
+            }
           />
         )
       })
@@ -178,11 +193,11 @@ class TournamentOverviewWidget extends Component {
    * renders items based on device as we cannot pass null or false to ScrolledList
    */
   renderScrolledListItems() {
-    let scrolledListItems = [
-      this.renderMatchEvents()
-    ]
+    let scrolledListItems = [this.renderMatchEvents()]
     if (mobile()) {
-      scrolledListItems.unshift(<TournamentLogo logoUrl={this.props.iconUrl} key='tournamentLogo' />)
+      scrolledListItems.unshift(
+        <TournamentLogo logoUrl={this.props.iconUrl} key="tournamentLogo" />
+      )
     }
 
     return scrolledListItems.map(item => item)
@@ -194,18 +209,20 @@ class TournamentOverviewWidget extends Component {
    */
   render() {
     const { leftWidget, rightWidget } = this.props.competitions
-    
+
     return (
-      <div className={[styles.widget, 'KambiWidget-primary-background-color'].join(' ')}>
-        <BlendedBackground backgroundUrl={this.props.backgroundUrl} blendWithOperatorColor={this.state.usingDefaultBackground} />
-        {
-          !mobile() &&
+      <div className={styles.widget}>
+        <BlendedBackground
+          backgroundUrl={this.props.backgroundUrl}
+          blendWithOperatorColor={this.state.usingDefaultBackground}
+        />
+        {!mobile() && (
           <div className={styles.topArea}>
-            { this.renderTopEvent(leftWidget) }
+            {this.renderTopEvent(leftWidget)}
             <TournamentLogo logoUrl={this.props.iconUrl} />
-            { this.renderTopEvent(rightWidget) }
+            {this.renderTopEvent(rightWidget)}
           </div>
-        }
+        )}
         <ScrolledList
           renderPrevButton={props => <ArrowButton type="left" {...props} />}
           renderNextButton={props => <ArrowButton type="right" {...props} />}
@@ -214,7 +231,7 @@ class TournamentOverviewWidget extends Component {
           scrollToItemMode={ScrolledList.SCROLL_TO_ITEM_MODE.TO_LEFT}
           showControls={!mobile()}
         >
-          { this.renderScrolledListItems() }
+          {this.renderScrolledListItems()}
         </ScrolledList>
       </div>
     )
@@ -235,7 +252,7 @@ TournamentOverviewWidget.propTypes = {
   iconUrl: PropTypes.string,
   eventsRefreshInterval: PropTypes.number,
   pollingCount: PropTypes.number,
-  filter: PropTypes.string.isRequired
+  filter: PropTypes.string.isRequired,
 }
 
 export default TournamentOverviewWidget
