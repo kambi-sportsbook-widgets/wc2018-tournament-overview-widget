@@ -1,5 +1,5 @@
 {
-  "name": "tournament-overview-widget",
+  "name": "wc2018-tournament-overview-widget",
   "version": "1.0.0",
   "description": "Tournament Overview Widget",
   "main": "dist/index.html",
