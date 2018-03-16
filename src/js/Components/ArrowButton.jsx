@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styles from './ArrowButton.scss'
 
-const ArrowButton = ({ type, disabled, onClick, customStyle=false }) => {
+const ArrowButton = ({ type, disabled, onClick, customStyle = false }) => {
   const buttonStyles = [styles[type]]
   if (customStyle) {
     buttonStyles.push('KambiWidget-primary-color')
@@ -11,11 +11,11 @@ const ArrowButton = ({ type, disabled, onClick, customStyle=false }) => {
   return (
     <button
       className={buttonStyles.join(' ')}
-      onClick={onClick}
       disabled={disabled}
-      style={customStyle ? {} : {color: '#000'}}
+      style={customStyle ? {} : { color: '#000' }}
     >
       <svg
+        onClick={onClick}
         className={styles.icon}
         width="22px"
         height="36px"
