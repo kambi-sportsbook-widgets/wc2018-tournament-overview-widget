@@ -1,28 +1,46 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styles from './ArrowButton.scss'
 
 import arrowSvg from '../../assets/arrow.svg'
 
-const ArrowButton = ({ type, disabled, onClick, customStyle = false }) => {
-  const buttonStyles = [styles[type]]
-  if (customStyle) {
-    buttonStyles.push('KambiWidget-primary-color')
+class ArrowButton extends Component {
+  state = {
+    isHovered: false,
   }
 
-  return (
-    <button
-      className={buttonStyles.join(' ')}
-      disabled={disabled}
-      style={customStyle ? {} : { color: '#000' }}
-    >
-      <div
-        onClick={onClick}
-        className={styles.icon}
-        style={{ backgroundImage: `url(${arrowSvg})` }}
-      />
-    </button>
-  )
+  updateHoveredState = bool => {
+    this.setState({
+      isHovered: bool,
+    })
+  }
+
+  render() {
+    const { disabled, onClick, type } = this.props
+    const iconStyles = [styles.icon]
+    const shadowStyles = [styles.shadow]
+
+    if (this.state.isHovered) {
+      iconStyles.push(styles.iconHover)
+    }
+    if (!disabled) {
+      shadowStyles.push(styles.shadowHover)
+    }
+
+    return (
+      <div className={styles[type]}>
+        <div className={shadowStyles.join(' ')} />
+        <button
+          className={iconStyles.join(' ')}
+          disabled={disabled}
+          onClick={onClick}
+          style={{ backgroundImage: `url(${arrowSvg})` }}
+          onMouseEnter={() => this.updateHoveredState(true)}
+          onMouseLeave={() => this.updateHoveredState(false)}
+        />
+      </div>
+    )
+  }
 }
 
 ArrowButton.propTypes = {

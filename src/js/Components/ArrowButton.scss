@@ -1,67 +1,57 @@
 .left,
 .right {
   position: absolute;
-  top: -12px;
-  bottom: -12px;
-  outline: none !important;
-  width: 8%;
-  min-width: 46px;
-  border: none;
-  background: none;
-  font-size: 15px;
-  font-weight: bold;
-  cursor: pointer;
-  padding: 0;
-  transition: opacity 0.3s;
-  pointer-events: none;
-
-  &[disabled] {
-    opacity: 0;
-    cursor: default;
-  }
-
-  &:after,
-  &:before {
-    content: '';
-    position: absolute;
-    top: 6px;
-    bottom: 0;
-    width: 200px;
-    height: 150px;
-    z-index: 1;
-    pointer-events: none;
-  }
+  bottom: 50%;
+  width: 22px;
+  height: 36px;
 
   .icon {
     width: 22px;
     height: 36px;
-    opacity: 0.5;
     transition: opacity 0.3s;
-    margin: 0 12px;
-    z-index: 2;
-    display: block;
-    pointer-events: stroke;
     background-size: contain;
+    background-color: transparent;
+    opacity: 0.5;
+    margin: 0 12px;
+    border: none;
+    outline: none !important;
+    cursor: pointer;
+
+    &Hover {
+      opacity: 1;
+    }
+
+    &[disabled] {
+      opacity: 0;
+      cursor: default;
+    }
+  }
+  :focus {
+    outline: 0;
   }
 
-  &:hover .icon {
-    opacity: 1;
+  .shadow {
+    position: absolute;
+    z-index: 0;
+    width: 200px;
+    pointer-events: none;
+    height: 150px;
+    opacity: 0;
+
+    &Hover {
+      opacity: 1;
+    }
   }
 }
-
-// $color: currentColor;
 
 .left {
   left: 0;
   text-align: left;
 
-  &:after {
-    background-image: none;
-  }
-  &:before {
+  .shadow {
     background-image: radial-gradient(
       ellipse 200px 135px at 0px 130px,
-      currentColor,
+      #000,
       rgba(#000, 0)
     );
     left: -20px;
@@ -69,24 +59,18 @@
 }
 
 .right {
-  right: 0;
-  display: flex;
-  justify-content: flex-end;
+  right: 24px;
 
-  &:after {
+  .icon {
+    transform: rotate(180deg);
+  }
+
+  .shadow {
     background-image: radial-gradient(
       ellipse 200px 135px at 200px 130px,
-      currentColor,
+      #000,
       rgba(#000, 0)
     );
     right: -20px;
-  }
-  &:before {
-    background-image: none;
-  }
-
-  .icon {
-    transform: scale(-1, 1);
-    pointer-events: stroke;
   }
 }
