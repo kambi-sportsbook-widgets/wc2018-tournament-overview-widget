@@ -18,9 +18,6 @@ coreLibrary
       'https://d1fqgomuxh4f5p.cloudfront.net/tournamentdata/worldcup2018/icons/',
     backgroundUrl:
       'https://d1fqgomuxh4f5p.cloudfront.net/tournamentdata/worldcup2018/overview-bw-bg-desktop.jpg',
-    pollingInterval: 30000,
-    pollingCount: 4,
-    eventsRefreshInterval: 120000,
     rightWidgetInput: {
       // golden boot
       eventId: 1004514530,
@@ -52,17 +49,8 @@ coreLibrary
     return kambi.getEvents(filter, leftWidgetInput, rightWidgetInput)
   })
   .then(({ events, competitions }) => {
-    const {
-      filter,
-      iconUrl,
-      flagBaseUrl,
-      backgroundUrl,
-      eventsRefreshInterval,
-      pollingCount,
-      pollingInterval,
-    } = coreLibrary.args
+    const { filter, iconUrl, flagBaseUrl, backgroundUrl } = coreLibrary.args
 
-    eventsModule.liveEventPollingInterval = pollingInterval
     ReactDOM.render(
       <TournamentOverviewWidget
         competitions={competitions}
@@ -70,8 +58,6 @@ coreLibrary
         iconUrl={iconUrl}
         flagBaseUrl={flagBaseUrl}
         backgroundUrl={backgroundUrl}
-        eventsRefreshInterval={eventsRefreshInterval}
-        pollingCount={pollingCount}
         filter={filter}
       />,
       document.getElementById('root')

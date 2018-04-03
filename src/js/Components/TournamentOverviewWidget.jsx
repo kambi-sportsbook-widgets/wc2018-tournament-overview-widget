@@ -250,8 +250,6 @@ TournamentOverviewWidget.propTypes = {
   backgroundUrl: PropTypes.string,
   flagBaseUrl: PropTypes.string,
   iconUrl: PropTypes.string,
-  eventsRefreshInterval: PropTypes.number,
-  pollingCount: PropTypes.number,
   filter: PropTypes.string.isRequired,
 }
 
