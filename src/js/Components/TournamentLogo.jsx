@@ -5,7 +5,6 @@ import { translationModule } from 'kambi-widget-core-library'
 import styles from './TournamentLogo.scss'
 import mobile from '../Services/mobile'
 
-
 const t = translationModule.getTranslation.bind(translationModule)
 
 const TournamentLogo = ({ logoUrl, scrolledListHasHorizontalSpaceLeft }) => {

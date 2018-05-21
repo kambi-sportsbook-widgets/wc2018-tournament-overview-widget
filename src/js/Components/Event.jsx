@@ -86,7 +86,6 @@ class Event extends Component {
     )
   }
 
-
   /**
    * Renders component.
    * @returns {XML}
@@ -104,7 +103,9 @@ class Event extends Component {
                 className={styles.flag}
                 src={this.props.homeFlag}
                 alt=""
-                ref={(img) => { this.imgHome = img }}
+                ref={img => {
+                  this.imgHome = img
+                }}
                 onError={() => this.handleBrokenUrl('imgHome')}
               />
             )}
@@ -126,7 +127,9 @@ class Event extends Component {
                 className={styles.flag}
                 src={this.props.awayFlag}
                 alt=""
-                ref={(img) => { this.imgAway = img }}
+                ref={img => {
+                  this.imgAway = img
+                }}
                 onError={() => this.handleBrokenUrl('imgAway')}
               />
             )}
@@ -144,8 +147,7 @@ class Event extends Component {
               />
             ))}
 
-          {
-            this.props.liveData && (
+          {this.props.liveData && (
             <OutcomeButtonUI
               event={this.props.event}
               label={
@@ -164,12 +166,12 @@ class Event extends Component {
   }
 }
 
- /**
-   * event {object} contains event metadata
-   * outcomes {array} event outcomes
-   * liveData {object} live metadata
-   * flagBaseUrl {string} url path to flag icons
-   */
+/**
+ * event {object} contains event metadata
+ * outcomes {array} event outcomes
+ * liveData {object} live metadata
+ * flagBaseUrl {string} url path to flag icons
+ */
 Event.propTypes = {
   event: PropTypes.object.isRequired,
   outcomes: PropTypes.array,
@@ -180,7 +182,7 @@ Event.propTypes = {
 Event.defaultProps = {
   outcomes: [],
   liveData: null,
-  flagBaseUrl: 'assets/icons/'
+  flagBaseUrl: 'assets/icons/',
 }
 
 export default Event
