@@ -1,6 +1,6 @@
 {
   "name": "wc2018-tournament-overview-widget",
-  "version": "1.1.9",
+  "version": "2.0.0",
   "description": "Tournament Overview Widget",
   "main": "dist/index.html",
   "scripts": {
@@ -12,12 +12,10 @@
     "preversion": "kambi-widgets-cli preversion",
     "postversion": "kambi-widgets-cli postversion",
     "test": "kambi-widgets-cli test",
-    "prettier-all":
-      "find ./src -name \"*.jsx\" -o -name \"*.js\" | xargs prettier --write",
+    "prettier-all": "prettier --write src/**/*.jsx",
     "precommit": "lint-staged",
     "start:embedded": "kambi-widgets-cli start-embedded",
-    "build:embedded": "kambi-widgets-cli build-embedded",
-    "prettier-all": "prettier --write src/**/*.jsx"
+    "build:embedded": "kambi-widgets-cli build-embedded"
   },
   "prettier": {
     "tabWidth": 2,
@@ -27,20 +25,20 @@
     "trailingComma": "es5"
   },
   "lint-staged": {
-    "*.{js,json,css}": ["prettier --write", "git add"]
+    "*.{js,json,css}": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "repository": {
     "type": "git",
-    "url":
-      "git+ssh://git@github.com/kambi-sportsbook-widgets/wc2018-tournament-overview-widget.git"
+    "url": "git+ssh://git@github.com/kambi-sportsbook-widgets/wc2018-tournament-overview-widget.git"
   },
   "license": "MIT",
   "bugs": {
-    "url":
-      "https://github.com/kambi-sportsbook-widgets/wc2018-tournament-overview-widget/issues"
+    "url": "https://github.com/kambi-sportsbook-widgets/wc2018-tournament-overview-widget/issues"
   },
-  "homepage":
-    "https://github.com/kambi-sportsbook-widgets/wc2018-tournament-overview-widget#readme",
+  "homepage": "https://github.com/kambi-sportsbook-widgets/wc2018-tournament-overview-widget#readme",
   "devDependencies": {
     "lint-staged": "^6.1.0",
     "prettier": "^1.10.2"
