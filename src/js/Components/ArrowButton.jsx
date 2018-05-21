@@ -2,7 +2,27 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styles from './ArrowButton.scss'
 
-import arrowSvg from '../../assets/arrow.svg'
+const ArrowSvg = () => {
+  return (
+    <svg
+      width="22px"
+      height="36px"
+      viewBox="0 860 420 500"
+      version="1.1"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="#fff"
+    >
+      <path
+        id="arrowLeft"
+        transform="scale(1, -1) translate(0, -1500)"
+        d="M358.286 640q0-7.429-5.714-13.143l-224.571-224.571 224.571-224.571q5.714-5.714
+            5.714-13.143t-5.714-13.143l-28.571-28.571q-5.714-5.714-13.143-5.714t-13.143 5.714l-266.286
+            266.286q-5.714 5.714-5.714 13.143t5.714 13.143l266.286 266.286q5.714 5.714
+            13.143 5.714t13.143-5.714l28.571-28.571q5.714-5.714 5.714-13.143z"
+      />
+    </svg>
+  )
+}
 
 class ArrowButton extends Component {
   state = {
@@ -34,10 +54,11 @@ class ArrowButton extends Component {
           className={iconStyles.join(' ')}
           disabled={disabled}
           onClick={onClick}
-          style={{ backgroundImage: `url(${arrowSvg})` }}
           onMouseEnter={() => this.updateHoveredState(true)}
           onMouseLeave={() => this.updateHoveredState(false)}
-        />
+        >
+          <ArrowSvg />
+        </button>
       </div>
     )
   }

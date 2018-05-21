@@ -20,7 +20,7 @@ import ListItem from './ListItem'
  */
 const MOBILE_INITIAL_SCROLL_DELAY = 2000
 const WORLD_CUP_2018_ID = 2000075007
-const WIDGET_HEIGHT_DESKTOP = 350
+const WIDGET_HEIGHT_DESKTOP = 370
 const WIDGET_HEIGHT_MOBILE = 150
 const DEFAULT_BACKGROUND =
   'https://d1fqgomuxh4f5p.cloudfront.net/tournamentdata/worldcup2018/overview-bw-bg-desktop.jpg'
