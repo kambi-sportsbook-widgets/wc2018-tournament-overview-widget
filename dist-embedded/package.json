@@ -1,6 +1,6 @@
 {
   "name": "wc2018-tournament-overview-widget",
-  "version": "1.1.9",
+  "version": "2.0.0",
   "description": "Tournament Overview Widget",
   "main": "dist/index.html",
   "scripts": {
@@ -12,7 +12,7 @@
     "preversion": "kambi-widgets-cli preversion",
     "postversion": "kambi-widgets-cli postversion",
     "test": "kambi-widgets-cli test",
-    "prettier-all": "find ./src -name \"*.jsx\" -o -name \"*.js\" | xargs prettier --write",
+    "prettier-all": "prettier --write src/**/*.jsx",
     "precommit": "lint-staged",
     "start:embedded": "kambi-widgets-cli start-embedded",
     "build:embedded": "kambi-widgets-cli build-embedded"
@@ -47,8 +47,8 @@
     "https": true
   },
   "dependencies": {
-    "kambi-widget-components": "^1.21.2",
-    "kambi-widget-core-library": "^4.6.10",
+    "kambi-widget-components": "^1.21.5",
+    "kambi-widget-core-library": "^4.6.11",
     "prop-types": "^15.4.1"
   }
 }
