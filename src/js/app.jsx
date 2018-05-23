@@ -60,10 +60,16 @@ coreLibrary
         backgroundUrl={backgroundUrl}
         filter={filter}
       />,
-      document.getElementById('root')
+      coreLibrary.rootElement
     )
+    const originalWidgetRemoved = coreLibrary.args.onWidgetRemoved
+    coreLibrary.args.onWidgetRemoved = () => {
+      ReactDOM.unmountComponentAtNode(coreLibrary.rootElement)
+      originalWidgetRemoved()
+    }
+    coreLibrary.args.onWidgetLoaded()
   })
   .catch(err => {
     console.error(err)
-    widgetModule.removeWidget()
+    widgetModule.removeWidget(err)
   })

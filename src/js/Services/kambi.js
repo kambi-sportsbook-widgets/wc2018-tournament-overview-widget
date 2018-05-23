@@ -1,8 +1,4 @@
-import {
-  offeringModule,
-  widgetModule,
-} from 'kambi-widget-core-library'
-
+import { offeringModule, widgetModule } from 'kambi-widget-core-library'
 
 /**
  * Fetches events by supplied filter
@@ -10,16 +6,17 @@ import {
  * @returns {Promise.<{filter: string, events: object[]}>}
  */
 const getEvents = (filter, leftWidgetInput, rightWidgetInput) => {
-
   const dataRequests = [
     offeringModule.getEventsByFilter(filter), // tournament matches
-    offeringModule.getEventsByFilter(`${filter}/all/all/competitions`) // tournament competitions (e.g. golden boot, tournament winner etc.)
+    offeringModule.getEventsByFilter(`${filter}/all/all/competitions`), // tournament competitions (e.g. golden boot, tournament winner etc.)
   ]
 
   return Promise.all(dataRequests)
     .then(tournamentData => {
       if (tournamentData == null) {
-        throw new Error(`No tournament data available for supplied filters: ${filter}, ${filter}/all/all/competitions`)
+        throw new Error(
+          `No tournament data available for supplied filters: ${filter}, ${filter}/all/all/competitions`
+        )
       }
       const tournamentEvents = tournamentData[0].events
       const tournamentCompetitions = tournamentData[1].events
@@ -44,26 +41,31 @@ const getEvents = (filter, leftWidgetInput, rightWidgetInput) => {
         })
       })
 
-      return Promise.resolve({ events: tournamentEvents, competitions: {leftWidget, rightWidget}})
+      return Promise.resolve({
+        events: tournamentEvents,
+        competitions: { leftWidget, rightWidget },
+      })
     })
     .catch(err => {
-      Promise.reject(err)
+      return Promise.reject(err)
     })
 }
 
-export const getMatchEvents = (filter) => {
-  return offeringModule.getEventsByFilter(filter)
+export const getMatchEvents = filter => {
+  return offeringModule
+    .getEventsByFilter(filter)
     .then(tournamentData => {
       if (tournamentData == null) {
-        throw new Error(`No tournament data available for supplied filters: ${filter}, ${filter}/all/all/competitions`)
-      }      
+        throw new Error(
+          `No tournament data available for supplied filters: ${filter}, ${filter}/all/all/competitions`
+        )
+      }
 
       return Promise.resolve({ events: tournamentData.events })
     })
     .catch(err => {
-      Promise.reject(err)
+      return Promise.reject(err)
     })
 }
-
 
 export default { getEvents }
