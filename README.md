@@ -35,7 +35,7 @@ Arguments and default values:
 2.  `filter` - String - url path to tournament
 3.  `iconUrl` - String - url path to tournament icon
 4.  `flagBaseUrl` - String - url path to participant flags
-5.  `backGroundUrl` - String - url path to backgroundUrl. Option to provide custom background image for widget. Otherwise, default background will be used.events
+5.  `backgroundUrl` - String - url path to backgroundUrl. Option to provide custom background image for widget. Otherwise, default background will be used.events
 6.  `leftWidgetInput` - object - contains eventId {number} and criterionId {number} for betOffer to display in leftWidget. Option to provide alternative outright betoffer eventId and criterionId. Defults to _Winner_
 7.  `rightWidgetInput` - object - contains eventId {number} and criterionId {number} for betOffer to display in rightWidget. Option to provide alternative outright betoffer eventId and criterionId. Defaults to _Golden Boot_
 
