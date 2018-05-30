@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import { OutcomeButton } from 'kambi-widget-components'
 import styles from './ListItem.scss'
 
+import mobile from '../Services/mobile'
+
 class ListItem extends Component {
   /**
    * Removes images with broken urls
@@ -34,7 +36,13 @@ class ListItem extends Component {
               />
             </div>
           ) : null}
-          <span className={styles.participant}>{participant}</span>
+          <span
+            className={`${styles.participant} ${
+              mobile() ? '' : styles.participantDesktop
+            }`}
+          >
+            {participant}
+          </span>
           <div className={styles.button}>
             <OutcomeButton
               outcome={outcome}

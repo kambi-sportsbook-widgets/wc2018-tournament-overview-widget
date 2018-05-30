@@ -1,3 +1,5 @@
+import { coreLibrary } from 'kambi-widget-core-library'
+
 /**
  * Maximum mobile screen size
  * @type {number}
@@ -10,7 +12,8 @@ const MOBILE_SCREEN_MAX_SIZE = 768
  */
 const isMobile = function() {
   return (
-    document.body.offsetWidth <= MOBILE_SCREEN_MAX_SIZE &&
+    coreLibrary.rootElement.getBoundingClientRect().width <=
+      MOBILE_SCREEN_MAX_SIZE &&
     'ontouchstart' in window &&
     /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
       navigator.userAgent

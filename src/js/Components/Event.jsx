@@ -92,7 +92,11 @@ class Event extends Component {
    */
   render() {
     return (
-      <div className={styles.general}>
+      <div
+        className={`${styles.general} ${
+          this.props.isMobile ? '' : styles.generalDesktop
+        }`}
+      >
         <div className={styles.header} onClick={this.onClick}>
           <div className={styles.start}>{this.startDate}&nbsp;</div>
         </div>
@@ -171,12 +175,14 @@ class Event extends Component {
  * outcomes {array} event outcomes
  * liveData {object} live metadata
  * flagBaseUrl {string} url path to flag icons
+ * isMobile {bool} states if it's below or above mobile breakpoint
  */
 Event.propTypes = {
   event: PropTypes.object.isRequired,
   outcomes: PropTypes.array,
   liveData: PropTypes.shape(),
   flagBaseUrl: PropTypes.string,
+  isMobile: PropTypes.bool,
 }
 
 Event.defaultProps = {

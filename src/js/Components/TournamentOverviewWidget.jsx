@@ -55,10 +55,21 @@ class TournamentOverviewWidget extends Component {
       )
     }
     widgetModule.setWidgetHeight(this.state.widgetHeight)
+    window.addEventListener('resize', this.updateMobileState)
   }
 
   componentDidUpdate() {
     widgetModule.setWidgetHeight(this.state.widgetHeight)
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updateMobileState)
+  }
+
+  updateMobileState = () => {
+    this.setState({
+      mobile: mobile(),
+    })
   }
 
   /**
@@ -184,6 +195,7 @@ class TournamentOverviewWidget extends Component {
             awayFlag={
               isWorldCup ? this.generateCountryFlagUrl(countries[1]) : null
             }
+            isMobile={this.state.mobile}
           />
         )
       })
