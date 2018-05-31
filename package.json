@@ -1,6 +1,6 @@
 {
   "name": "wc2018-tournament-overview-widget",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "Tournament Overview Widget",
   "main": "dist/index.html",
   "scripts": {
