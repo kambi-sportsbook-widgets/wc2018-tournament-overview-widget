@@ -184,6 +184,7 @@ class TournamentOverviewWidget extends Component {
             awayFlag={
               isWorldCup ? this.generateCountryFlagUrl(countries[1]) : null
             }
+            isMobile={this.state.mobile}
           />
         )
       })
