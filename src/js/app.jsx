@@ -21,7 +21,8 @@ coreLibrary
     rightWidgetInput: {
       // golden boot
       eventId: 1004514530,
-      criterionId: 1001868386,
+      // criterionId: 1001868386,
+      criterionId: 3939993939,
     },
     leftWidgetInput: {
       // tournament winner

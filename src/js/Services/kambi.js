@@ -41,6 +41,11 @@ const getEvents = (filter, leftWidgetInput, rightWidgetInput) => {
         })
       })
 
+      if (!leftWidget || !rightWidget) {
+        throw new Error(`Could not find matching criterion IDs from data`)
+        return
+      }
+
       return Promise.resolve({
         events: tournamentEvents,
         competitions: { leftWidget, rightWidget },
