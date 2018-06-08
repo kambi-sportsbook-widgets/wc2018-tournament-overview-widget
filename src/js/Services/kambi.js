@@ -1,4 +1,4 @@
-import { offeringModule, widgetModule } from 'kambi-widget-core-library'
+import { getEventsByFilter, getEvent } from 'kambi-offering-api-module'
 
 /**
  * Fetches events by supplied filter
@@ -7,8 +7,8 @@ import { offeringModule, widgetModule } from 'kambi-widget-core-library'
  */
 const getEvents = (filter, leftWidgetInput, rightWidgetInput) => {
   const dataRequests = [
-    offeringModule.getEventsByFilter(filter), // tournament matches
-    offeringModule.getEventsByFilter(`${filter}/all/all/competitions`), // tournament competitions (e.g. golden boot, tournament winner etc.)
+    getEventsByFilter(filter), // tournament matches
+    getEventsByFilter(`${filter}/all/all/competitions`), // tournament competitions (e.g. golden boot, tournament winner etc.)
   ]
 
   return Promise.all(dataRequests)
@@ -57,8 +57,7 @@ const getEvents = (filter, leftWidgetInput, rightWidgetInput) => {
 }
 
 export const getMatchEvents = filter => {
-  return offeringModule
-    .getEventsByFilter(filter)
+  return getEventsByFilter(filter)
     .then(tournamentData => {
       if (tournamentData == null) {
         throw new Error(

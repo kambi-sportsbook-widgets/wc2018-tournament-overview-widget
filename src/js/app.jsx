@@ -5,6 +5,8 @@ import {
   eventsModule,
   widgetModule,
 } from 'kambi-widget-core-library'
+import { setConfigValues } from 'kambi-offering-api-module'
+
 import kambi from './Services/kambi'
 import TournamentOverviewWidget from './Components/TournamentOverviewWidget'
 
@@ -28,24 +30,12 @@ coreLibrary
       eventId: 1002163009,
       criterionId: 1004240929,
     },
-
-    // rightWidgetInput : { // golden ball
-    //   eventId: 1004494885,
-    //   criterionId: 1001613138,
-    // },
-    // // CHAMPIONS LEAGUE
-    // filter: "/football/champions_league",
-    // rightWidgetInput : { // top goalscorer (no golden boot)
-    //   eventId: 1004031266,
-    //   criterionId: 1001304945,
-    // },
-    // leftWidgetInput : { // tournament winner
-    //   eventId: 1003997020,
-    //   criterionId: 1001221607
-    // }
   })
   .then(() => {
     const { filter, leftWidgetInput, rightWidgetInput } = coreLibrary.args
+    // set config values from coreLibrary
+    setConfigValues(coreLibrary.config)
+
     return kambi.getEvents(filter, leftWidgetInput, rightWidgetInput)
   })
   .then(({ events, competitions }) => {
