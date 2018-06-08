@@ -34,7 +34,12 @@ coreLibrary
   .then(() => {
     const { filter, leftWidgetInput, rightWidgetInput } = coreLibrary.args
     // set config values from coreLibrary
-    setConfigValues(coreLibrary.config)
+    setConfigValues({
+      ...coreLibrary.config,
+      ...{
+        apiBaseUrl: 'https://e1-api.aws.kambicdn.com/offering/{apiVersion}/',
+      },
+    })
 
     return kambi.getEvents(filter, leftWidgetInput, rightWidgetInput)
   })
