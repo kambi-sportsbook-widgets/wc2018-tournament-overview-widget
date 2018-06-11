@@ -1,4 +1,5 @@
-import { getEventsByFilter, getEvent } from 'kambi-offering-api-module'
+// import { getEventsByFilter, getEvent } from 'kambi-offering-api-module'
+import { offeringModule } from 'kambi-widget-core-library'
 
 /**
  * Fetches events by supplied filter
@@ -7,8 +8,8 @@ import { getEventsByFilter, getEvent } from 'kambi-offering-api-module'
  */
 const getEvents = (filter, leftWidgetInput, rightWidgetInput) => {
   const dataRequests = [
-    getEventsByFilter(filter), // tournament matches
-    getEventsByFilter(`${filter}/all/all/competitions`), // tournament competitions (e.g. golden boot, tournament winner etc.)
+    offeringModule.getEventsByFilter(filter), // tournament matches
+    offeringModule.getEventsByFilter(`${filter}/all/all/competitions`), // tournament competitions (e.g. golden boot, tournament winner etc.)
   ]
 
   return Promise.all(dataRequests)
@@ -46,8 +47,19 @@ const getEvents = (filter, leftWidgetInput, rightWidgetInput) => {
         return
       }
 
+      // filter tournament events against main betoffer and correct criterion id as kambi sometimes adds other types of events to the same endpoint
+      const tournamentMatches = tournamentEvents.filter(event => {
+        let isTournamentMatch = false
+        event.betOffers.forEach(offer => {
+          if (offer.criterion.id === 1001159858 && offer.main) {
+            isTournamentMatch = true
+          }
+        })
+        return isTournamentMatch
+      })
+
       return Promise.resolve({
-        events: tournamentEvents,
+        events: tournamentMatches,
         competitions: { leftWidget, rightWidget },
       })
     })
@@ -57,7 +69,8 @@ const getEvents = (filter, leftWidgetInput, rightWidgetInput) => {
 }
 
 export const getMatchEvents = filter => {
-  return getEventsByFilter(filter)
+  return offeringModule
+    .getEventsByFilter(filter)
     .then(tournamentData => {
       if (tournamentData == null) {
         throw new Error(

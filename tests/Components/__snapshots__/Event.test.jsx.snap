@@ -2,17 +2,12 @@
 
 exports[`Event DOM rendering renders correctly with default props 1`] = `
 <div
-  className="general"
+  className="general generalDesktop"
 >
   <div
     className="header"
     onClick={[Function]}
   >
-    <div
-      className="group"
-    >
-      Test group
-    </div>
     <div
       className="start"
     >
@@ -27,11 +22,6 @@ exports[`Event DOM rendering renders correctly with default props 1`] = `
     <div
       className="team home"
     >
-      <img
-        alt=""
-        className="flag"
-        src="homeFlagUrl"
-      />
       <span
         className="name"
       >
@@ -46,11 +36,6 @@ exports[`Event DOM rendering renders correctly with default props 1`] = `
       >
         Poland
       </span>
-      <img
-        alt=""
-        className="flag"
-        src="awayFlagUrl"
-      />
     </div>
   </div>
   <div
@@ -61,17 +46,12 @@ exports[`Event DOM rendering renders correctly with default props 1`] = `
 
 exports[`Event DOM rendering renders correctly with event starting later than tomorrow 1`] = `
 <div
-  className="general"
+  className="general generalDesktop"
 >
   <div
     className="header"
     onClick={[Function]}
   >
-    <div
-      className="group"
-    >
-      Test group
-    </div>
     <div
       className="start"
     >
@@ -86,11 +66,6 @@ exports[`Event DOM rendering renders correctly with event starting later than to
     <div
       className="team home"
     >
-      <img
-        alt=""
-        className="flag"
-        src="homeFlagUrl"
-      />
       <span
         className="name"
       >
@@ -105,11 +80,6 @@ exports[`Event DOM rendering renders correctly with event starting later than to
       >
         Poland
       </span>
-      <img
-        alt=""
-        className="flag"
-        src="awayFlagUrl"
-      />
     </div>
   </div>
   <div
@@ -120,17 +90,12 @@ exports[`Event DOM rendering renders correctly with event starting later than to
 
 exports[`Event DOM rendering renders correctly with event starting today 1`] = `
 <div
-  className="general"
+  className="general generalDesktop"
 >
   <div
     className="header"
     onClick={[Function]}
   >
-    <div
-      className="group"
-    >
-      Test group
-    </div>
     <div
       className="start"
     >
@@ -145,11 +110,6 @@ exports[`Event DOM rendering renders correctly with event starting today 1`] = `
     <div
       className="team home"
     >
-      <img
-        alt=""
-        className="flag"
-        src="homeFlagUrl"
-      />
       <span
         className="name"
       >
@@ -164,11 +124,6 @@ exports[`Event DOM rendering renders correctly with event starting today 1`] = `
       >
         Poland
       </span>
-      <img
-        alt=""
-        className="flag"
-        src="awayFlagUrl"
-      />
     </div>
   </div>
   <div
@@ -179,17 +134,12 @@ exports[`Event DOM rendering renders correctly with event starting today 1`] = `
 
 exports[`Event DOM rendering renders correctly with event starting tomorrow 1`] = `
 <div
-  className="general"
+  className="general generalDesktop"
 >
   <div
     className="header"
     onClick={[Function]}
   >
-    <div
-      className="group"
-    >
-      Test group
-    </div>
     <div
       className="start"
     >
@@ -204,11 +154,6 @@ exports[`Event DOM rendering renders correctly with event starting tomorrow 1`] 
     <div
       className="team home"
     >
-      <img
-        alt=""
-        className="flag"
-        src="homeFlagUrl"
-      />
       <span
         className="name"
       >
@@ -223,11 +168,6 @@ exports[`Event DOM rendering renders correctly with event starting tomorrow 1`] 
       >
         Poland
       </span>
-      <img
-        alt=""
-        className="flag"
-        src="awayFlagUrl"
-      />
     </div>
   </div>
   <div
@@ -238,17 +178,12 @@ exports[`Event DOM rendering renders correctly with event starting tomorrow 1`] 
 
 exports[`Event DOM rendering renders correctly with live data 1`] = `
 <div
-  className="general"
+  className="general generalDesktop"
 >
   <div
     className="header"
     onClick={[Function]}
   >
-    <div
-      className="group"
-    >
-      Test group
-    </div>
     <div
       className="start"
     >
@@ -263,11 +198,6 @@ exports[`Event DOM rendering renders correctly with live data 1`] = `
     <div
       className="team home"
     >
-      <img
-        alt=""
-        className="flag"
-        src="homeFlagUrl"
-      />
       <span
         className="name"
       >
@@ -291,17 +221,17 @@ exports[`Event DOM rendering renders correctly with live data 1`] = `
       >
         Poland
       </span>
-      <img
-        alt=""
-        className="flag"
-        src="awayFlagUrl"
-      />
     </div>
   </div>
   <div
     className="outcomes"
   >
     <OutcomeButtonUI
+      event={
+        Object {
+          "id": 100,
+        }
+      }
       label={
         <span
           className="liveLabel"
@@ -314,6 +244,7 @@ exports[`Event DOM rendering renders correctly with live data 1`] = `
       }
       odds={null}
       onClick={[Function]}
+      outlineStyle={true}
       selected={false}
       suspended={false}
     />
@@ -323,17 +254,12 @@ exports[`Event DOM rendering renders correctly with live data 1`] = `
 
 exports[`Event DOM rendering renders correctly with outcomes 1`] = `
 <div
-  className="general"
+  className="general generalDesktop"
 >
   <div
     className="header"
     onClick={[Function]}
   >
-    <div
-      className="group"
-    >
-      Test group
-    </div>
     <div
       className="start"
     >
@@ -348,11 +274,6 @@ exports[`Event DOM rendering renders correctly with outcomes 1`] = `
     <div
       className="team home"
     >
-      <img
-        alt=""
-        className="flag"
-        src="homeFlagUrl"
-      />
       <span
         className="name"
       >
@@ -367,41 +288,48 @@ exports[`Event DOM rendering renders correctly with outcomes 1`] = `
       >
         Poland
       </span>
-      <img
-        alt=""
-        className="flag"
-        src="awayFlagUrl"
-      />
     </div>
   </div>
   <div
     className="outcomes"
   >
     <OutcomeButton
+      betslipDefaultStake={null}
+      betslipTrackingName={null}
+      betslipUpdateMode={null}
       event={
         Object {
           "id": 100,
         }
       }
       label={true}
+      onSelection={null}
       outcome={
         Object {
           "id": 200,
         }
       }
+      outlineStyle={true}
+      updateOdds={false}
     />
     <OutcomeButton
+      betslipDefaultStake={null}
+      betslipTrackingName={null}
+      betslipUpdateMode={null}
       event={
         Object {
           "id": 100,
         }
       }
       label={true}
+      onSelection={null}
       outcome={
         Object {
           "id": 300,
         }
       }
+      outlineStyle={true}
+      updateOdds={false}
     />
   </div>
 </div>

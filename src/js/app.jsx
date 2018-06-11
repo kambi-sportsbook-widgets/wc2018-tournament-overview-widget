@@ -5,7 +5,7 @@ import {
   eventsModule,
   widgetModule,
 } from 'kambi-widget-core-library'
-import { setConfigValues } from 'kambi-offering-api-module'
+// import { setConfigValues } from 'kambi-offering-api-module'
 
 import kambi from './Services/kambi'
 import TournamentOverviewWidget from './Components/TournamentOverviewWidget'
@@ -33,13 +33,18 @@ coreLibrary
   })
   .then(() => {
     const { filter, leftWidgetInput, rightWidgetInput } = coreLibrary.args
+    /////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////
+    // USE LATER FOR V2018
     // set config values from coreLibrary
-    setConfigValues({
-      ...coreLibrary.config,
-      ...{
-        apiBaseUrl: 'https://e1-api.aws.kambicdn.com/offering/{apiVersion}/',
-      },
-    })
+    // setConfigValues({
+    //   ...coreLibrary.config,
+    //   ...{
+    //     apiBaseUrl: 'https://e1-api.aws.kambicdn.com/offering/{apiVersion}/',
+    //   },
+    // })
+    /////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////
 
     return kambi.getEvents(filter, leftWidgetInput, rightWidgetInput)
   })
