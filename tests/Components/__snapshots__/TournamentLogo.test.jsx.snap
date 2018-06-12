@@ -2,30 +2,50 @@
 
 exports[`Event DOM rendering renders correctly with custom logo CSS class name 1`] = `
 <div
-  className="general"
+  className="general desktop"
 >
   <i
     className="kw-custom-logo-large-type"
     style={
       Object {
-        "backgroundImage": "url(assets/icons/football.svg)",
+        "backgroundImage": "url(\\"undefined\\")",
       }
     }
   />
+  <div
+    className="tournament"
+  >
+    <p>
+      TRANSLATED WC2018
+    </p>
+    <p>
+      TRANSLATED RUSSIA
+    </p>
+  </div>
 </div>
 `;
 
 exports[`Event DOM rendering renders correctly with default props 1`] = `
 <div
-  className="general"
+  className="general desktop"
 >
   <i
     className="kw-custom-logo-large-type"
     style={
       Object {
-        "backgroundImage": "url(assets/icons/football.svg)",
+        "backgroundImage": "url(\\"undefined\\")",
       }
     }
   />
+  <div
+    className="tournament"
+  >
+    <p>
+      TRANSLATED WC2018
+    </p>
+    <p>
+      TRANSLATED RUSSIA
+    </p>
+  </div>
 </div>
 `;

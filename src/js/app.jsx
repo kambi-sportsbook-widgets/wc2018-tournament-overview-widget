@@ -58,7 +58,6 @@ coreLibrary
         iconUrl={iconUrl}
         flagBaseUrl={flagBaseUrl}
         backgroundUrl={backgroundUrl}
-        filter={filter}
       />,
       coreLibrary.rootElement,
       () => {

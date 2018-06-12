@@ -2,7 +2,62 @@
 
 exports[`Kambi service progressive events returns events correctly 1`] = `
 Object {
+  "competitions": Object {
+    "leftWidget": Object {
+      "betOffers": Array [
+        Object {
+          "criterion": Object {
+            "id": 100,
+          },
+          "id": 1,
+          "outcomes": Array [],
+        },
+        Object {
+          "criterion": Object {
+            "id": 200,
+          },
+          "id": 2,
+          "outcomes": Array [],
+        },
+      ],
+      "event": Object {
+        "englishName": "Mock english name",
+        "group": "VM 2018",
+        "groupId": 393929,
+        "id": 999,
+        "name": "Mock name",
+        "type": "ET_MATCH",
+      },
+      "liveData": Object {},
+    },
+    "rightWidget": Object {
+      "betOffers": Array [
+        Object {
+          "criterion": Object {
+            "id": 100,
+          },
+          "id": 1,
+          "outcomes": Array [],
+        },
+        Object {
+          "criterion": Object {
+            "id": 200,
+          },
+          "id": 2,
+          "outcomes": Array [],
+        },
+      ],
+      "event": Object {
+        "englishName": "Mock english name",
+        "group": "VM 2018",
+        "groupId": 393929,
+        "id": 666,
+        "name": "Mock name",
+        "type": "ET_MATCH",
+      },
+      "liveData": Object {},
+    },
+  },
   "events": Array [],
-  "filter": "test/filter/1",
 }
 `;

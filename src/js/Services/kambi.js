@@ -21,7 +21,6 @@ const getEvents = (filter, leftWidgetInput, rightWidgetInput) => {
       }
       const tournamentEvents = tournamentData[0].events
       const tournamentCompetitions = tournamentData[1].events
-
       // get competitions to render by criterionId (hardcoded)
       let leftWidget
       let rightWidget

@@ -251,7 +251,6 @@ TournamentOverviewWidget.propTypes = {
   backgroundUrl: PropTypes.string,
   flagBaseUrl: PropTypes.string,
   iconUrl: PropTypes.string,
-  filter: PropTypes.string.isRequired,
 }
 
 export default TournamentOverviewWidget

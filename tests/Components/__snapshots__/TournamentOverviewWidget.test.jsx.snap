@@ -1,0 +1,271 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TournamentOverviewWidget DOM rendering renders correctly in desktop mode 1`] = `
+"<div className=\\"widget\\">
+  <BlendedBackground backgroundUrl=\\"some/fake/path.jpg\\" blendWithOperatorColor={false} />
+  <div className=\\"topArea\\">
+    <List title=\\"VM 2018 - Mock name\\" handleClick={[Function: handleClick]} showNavLink={false} navText=\\"Translated showAllParticipants\\" />
+    <TournamentLogo logoUrl={[undefined]} logoName=\\"football\\" />
+    <List title=\\"VM 2018 - Mock name\\" handleClick={[Function: handleClick]} showNavLink={false} navText=\\"Translated showAllParticipants\\" />
+  </div>
+  <ScrolledList renderPrevButton={[Function: renderPrevButton]} renderNextButton={[Function: renderNextButton]} renderItemContainer={[Function: renderItemContainer]} selected={0} scrollToItemMode=\\"to-left\\" showControls={true} step={2} alignItems=\\"center\\">
+    <Event event={{...}} liveData={{...}} outcomes={{...}} homeFlag={{...}} awayFlag={{...}} isMobile={false} flagBaseUrl=\\"assets/icons/\\" />
+  </ScrolledList>
+</div>"
+`;
+
+exports[`TournamentOverviewWidget DOM rendering renders correctly in mobile mode 1`] = `
+"<div className=\\"widget\\">
+  <BlendedBackground backgroundUrl=\\"some/fake/path.jpg\\" blendWithOperatorColor={false} />
+  <ScrolledList renderPrevButton={[Function: renderPrevButton]} renderNextButton={[Function: renderNextButton]} renderItemContainer={[Function: renderItemContainer]} selected={0} scrollToItemMode=\\"to-left\\" showControls={false} step={2} alignItems=\\"center\\">
+    <TournamentLogo logoUrl={[undefined]} logoName=\\"football\\" />
+    <Event event={{...}} liveData={{...}} outcomes={{...}} homeFlag={{...}} awayFlag={{...}} isMobile={true} flagBaseUrl=\\"assets/icons/\\" />
+  </ScrolledList>
+</div>"
+`;
+
+exports[`TournamentOverviewWidget DOM rendering renders correctly in mobile mode 2`] = `
+"<div className=\\"widget\\">
+  <BlendedBackground backgroundUrl=\\"some/fake/path.jpg\\" blendWithOperatorColor={false} />
+  <ScrolledList renderPrevButton={[Function: renderPrevButton]} renderNextButton={[Function: renderNextButton]} renderItemContainer={[Function: renderItemContainer]} selected={0} scrollToItemMode=\\"to-left\\" showControls={false} step={2} alignItems=\\"center\\">
+    <TournamentLogo logoUrl={[undefined]} logoName=\\"football\\" />
+    <Event event={{...}} liveData={{...}} outcomes={{...}} homeFlag={{...}} awayFlag={{...}} isMobile={true} flagBaseUrl=\\"assets/icons/\\" />
+  </ScrolledList>
+</div>"
+`;
+
+exports[`TournamentOverviewWidget DOM rendering renders correctly with default props 1`] = `
+<div
+  className="widget"
+>
+  <BlendedBackground
+    backgroundUrl="some/fake/path.jpg"
+    blendWithOperatorColor={false}
+  />
+  <div
+    className="topArea"
+  >
+    <List
+      handleClick={[Function]}
+      navText="Translated showAllParticipants"
+      showNavLink={false}
+      title="VM 2018 - Mock name"
+    />
+    <TournamentLogo
+      logoName="football"
+      logoUrl={undefined}
+    />
+    <List
+      handleClick={[Function]}
+      navText="Translated showAllParticipants"
+      showNavLink={false}
+      title="VM 2018 - Mock name"
+    />
+  </div>
+  <ScrolledList
+    alignItems="center"
+    renderItemContainer={[Function]}
+    renderNextButton={[Function]}
+    renderPrevButton={[Function]}
+    scrollToItemMode="to-left"
+    selected={0}
+    showControls={true}
+    step={2}
+  >
+    <Event
+      awayFlag={null}
+      event={
+        Object {
+          "englishName": "Mock english name",
+          "group": "VM 2018",
+          "groupId": 393929,
+          "id": 100,
+          "name": "Mock name",
+        }
+      }
+      flagBaseUrl="assets/icons/"
+      homeFlag={null}
+      isMobile={false}
+      liveData={Object {}}
+      outcomes={Array []}
+    />
+  </ScrolledList>
+</div>
+`;
+
+exports[`TournamentOverviewWidget DOM rendering renders correctly with events 1`] = `
+<div
+  className="widget"
+>
+  <BlendedBackground
+    backgroundUrl="some/fake/path.jpg"
+    blendWithOperatorColor={false}
+  />
+  <div
+    className="topArea"
+  >
+    <List
+      handleClick={[Function]}
+      navText="Translated showAllParticipants"
+      showNavLink={false}
+      title="VM 2018 - Mock name"
+    />
+    <TournamentLogo
+      logoName="football"
+      logoUrl={undefined}
+    />
+    <List
+      handleClick={[Function]}
+      navText="Translated showAllParticipants"
+      showNavLink={false}
+      title="VM 2018 - Mock name"
+    />
+  </div>
+  <ScrolledList
+    alignItems="center"
+    renderItemContainer={[Function]}
+    renderNextButton={[Function]}
+    renderPrevButton={[Function]}
+    scrollToItemMode="to-left"
+    selected={0}
+    showControls={true}
+    step={2}
+  >
+    <Event
+      awayFlag={null}
+      event={
+        Object {
+          "englishName": "Mock english name",
+          "group": "VM 2018",
+          "groupId": 393929,
+          "id": 100,
+          "name": "Mock name",
+        }
+      }
+      flagBaseUrl="assets/icons/"
+      homeFlag={null}
+      isMobile={false}
+      liveData={Object {}}
+      outcomes={Array []}
+    />
+  </ScrolledList>
+</div>
+`;
+
+exports[`TournamentOverviewWidget DOM rendering renders correctly with events and betoffers 1`] = `
+<div
+  className="widget"
+>
+  <BlendedBackground
+    backgroundUrl="some/fake/path.jpg"
+    blendWithOperatorColor={false}
+  />
+  <div
+    className="topArea"
+  >
+    <List
+      handleClick={[Function]}
+      navText="Translated showAllParticipants"
+      showNavLink={false}
+      title="VM 2018 - Mock name"
+    />
+    <TournamentLogo
+      logoName="football"
+      logoUrl={undefined}
+    />
+    <List
+      handleClick={[Function]}
+      navText="Translated showAllParticipants"
+      showNavLink={false}
+      title="VM 2018 - Mock name"
+    />
+  </div>
+  <ScrolledList
+    alignItems="center"
+    renderItemContainer={[Function]}
+    renderNextButton={[Function]}
+    renderPrevButton={[Function]}
+    scrollToItemMode="to-left"
+    selected={0}
+    showControls={true}
+    step={2}
+  >
+    <Event
+      awayFlag={null}
+      event={
+        Object {
+          "englishName": "Mock english name",
+          "group": "VM 2018",
+          "groupId": 393929,
+          "id": 100,
+          "name": "Mock name",
+        }
+      }
+      flagBaseUrl="assets/icons/"
+      homeFlag={null}
+      isMobile={false}
+      liveData={Object {}}
+      outcomes={Array []}
+    />
+  </ScrolledList>
+</div>
+`;
+
+exports[`TournamentOverviewWidget DOM rendering renders correctly with tournament logo 1`] = `
+<div
+  className="widget"
+>
+  <BlendedBackground
+    backgroundUrl="some/fake/path.jpg"
+    blendWithOperatorColor={false}
+  />
+  <div
+    className="topArea"
+  >
+    <List
+      handleClick={[Function]}
+      navText="Translated showAllParticipants"
+      showNavLink={false}
+      title="VM 2018 - Mock name"
+    />
+    <TournamentLogo
+      logoName="football"
+      logoUrl={undefined}
+    />
+    <List
+      handleClick={[Function]}
+      navText="Translated showAllParticipants"
+      showNavLink={false}
+      title="VM 2018 - Mock name"
+    />
+  </div>
+  <ScrolledList
+    alignItems="center"
+    renderItemContainer={[Function]}
+    renderNextButton={[Function]}
+    renderPrevButton={[Function]}
+    scrollToItemMode="to-left"
+    selected={0}
+    showControls={true}
+    step={2}
+  >
+    <Event
+      awayFlag={null}
+      event={
+        Object {
+          "englishName": "Mock english name",
+          "group": "VM 2018",
+          "groupId": 393929,
+          "id": 100,
+          "name": "Mock name",
+        }
+      }
+      flagBaseUrl="assets/icons/"
+      homeFlag={null}
+      isMobile={false}
+      liveData={Object {}}
+      outcomes={Array []}
+    />
+  </ScrolledList>
+</div>
+`;

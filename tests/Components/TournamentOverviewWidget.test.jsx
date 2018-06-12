@@ -1,89 +1,110 @@
 /* eslint-env jest */
-import React from 'react';
-import ReactShallowRenderer from 'react-test-renderer/shallow';
-import { mount } from 'enzyme';
-import TournamentOverviewWidget from '../../src/js/Components/TournamentOverviewWidget';
+import React from 'react'
+import ReactShallowRenderer from 'react-test-renderer/shallow'
+import { shallow } from 'enzyme'
+import {
+  widgetModule,
+  coreLibrary,
+  translationModule,
+} from 'kambi-widget-core-library'
 
-let renderer;
+import TournamentOverviewWidget from '../../src/js/Components/TournamentOverviewWidget'
+
+let renderer
 
 const mockEvent = {
-   event: {
-      id: 100
-   },
-   liveData: {},
-   betOffers: []
-};
+  event: {
+    id: 100,
+    group: 'VM 2018',
+    groupId: 393929,
+    name: 'Mock name',
+    englishName: 'Mock english name',
+  },
+  liveData: {},
+  betOffers: [{ id: 1, outcomes: [] }],
+}
 
-let mockMobile = false;
+const mockCompetitions = {
+  leftWidget: mockEvent,
+  rightWidget: mockEvent,
+}
 
-jest.mock('../../src/js/Services/mobile', () => () => mockMobile);
+const mockBgUrl = 'some/fake/path.jpg'
 
-jest.useFakeTimers();
+let mockMobile = false
+
+jest.mock('../../src/js/Services/mobile', () => () => mockMobile)
+jest.mock('kambi-widget-core-library', () => ({
+  widgetModule: {
+    setWidgetHeight: jest.fn(),
+  },
+  translationModule: {
+    getTranslation: jest.fn(key => `Translated ${key}`),
+  },
+  coreLibrary: {
+    rootElement: <div />,
+  },
+}))
+
+jest.useFakeTimers()
+
+const widget = (
+  <TournamentOverviewWidget
+    events={[mockEvent]}
+    competitions={mockCompetitions}
+    backgroundUrl={mockBgUrl}
+  />
+)
 
 describe('TournamentOverviewWidget DOM rendering', () => {
+  beforeEach(() => {
+    renderer = new ReactShallowRenderer()
+    mockMobile = false
+    translationModule.getTranslation = jest.fn()
+    widgetModule.setWidgetHeight = jest.fn()
+    coreLibrary.rootElement = <div />
+  })
 
-   beforeEach(() => {
-      renderer = new ReactShallowRenderer();
-      mockMobile = false;
-   });
+  it('renders correctly with default props', () => {
+    expect(renderer.render(widget)).toMatchSnapshot()
+  })
 
-   it('renders correctly with default props', () => {
-      expect(renderer.render(
-         <TournamentOverviewWidget events={[]} />
-      )).toMatchSnapshot();
-   });
+  it('renders correctly with tournament logo', () => {
+    expect(
+      renderer.render(
+        <TournamentOverviewWidget
+          events={[mockEvent]}
+          competitions={mockCompetitions}
+          tournamentLogo="test_tournament_logo"
+          backgroundUrl={mockBgUrl}
+        />
+      )
+    ).toMatchSnapshot()
+  })
 
-   it('renders correctly with tournament logo', () => {
-      expect(renderer.render(
-         <TournamentOverviewWidget events={[]} tournamentLogo="test_tournament_logo" />
-      )).toMatchSnapshot();
-   });
+  it('renders correctly with events', () => {
+    expect(renderer.render(widget)).toMatchSnapshot()
+  })
 
-   it('renders correctly with events', () => {
-      expect(renderer.render(
-         <TournamentOverviewWidget
-            events={[
-               Object.assign({}, mockEvent, {event: {id: 100}}),
-               Object.assign({}, mockEvent, {event: {id: 200}})
-            ]} />
-      )).toMatchSnapshot();
-   });
+  it('renders correctly with events and betoffers', () => {
+    expect(renderer.render(widget)).toMatchSnapshot()
+  })
 
-   it('renders correctly with events and betoffers', () => {
-      expect(renderer.render(
-         <TournamentOverviewWidget
-            events={[
-               Object.assign({}, mockEvent, {event: {id: 100}, betOffers: [{outcomes: []}]}),
-               Object.assign({}, mockEvent, {event: {id: 200}, betOffers: [{outcomes: []}]})
-            ]} />
-      )).toMatchSnapshot();
-   });
+  it('renders correctly in desktop mode', () => {
+    mockMobile = false
+    const wrapper = shallow(widget)
+    expect(wrapper.debug()).toMatchSnapshot()
+  })
 
-});
+  it('renders correctly in mobile mode', () => {
+    mockMobile = true
 
-describe('TournamentOverviewWidget behaviour', () => {
+    const wrapper = shallow(widget)
 
-   beforeEach(() => {
-      renderer = new ReactShallowRenderer();
-   });
+    expect(wrapper.debug()).toMatchSnapshot()
 
-   it('mounts correctly in desktop mode', () => {
-      mockMobile = false;
-      const wrapper = mount(<TournamentOverviewWidget events={[]} />);
-      expect(wrapper.debug()).toMatchSnapshot();
+    jest.runAllTimers()
 
-   });
-
-   it('mounts correctly in mobile mode', () => {
-      mockMobile = true;
-
-      const wrapper = mount(<TournamentOverviewWidget events={[]} />);
-
-      expect(wrapper.debug()).toMatchSnapshot();
-
-      jest.runAllTimers();
-
-      expect(wrapper.debug()).toMatchSnapshot();
-   });
-
-});
+    expect(wrapper.debug()).toMatchSnapshot()
+  })
+})
