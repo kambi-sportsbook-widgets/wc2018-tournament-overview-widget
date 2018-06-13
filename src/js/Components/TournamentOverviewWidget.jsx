@@ -91,7 +91,7 @@ class TournamentOverviewWidget extends Component {
    * event { shape } contains event metadata
    */
   generateWidgetItemTitle(event) {
-    return `${event.group} - ${name.split('(')[0].trim()}` // e.g "WM 2018 - Skyttekung"
+    return `${event.group} - ${event.name.split('(')[0].trim()}` // e.g "WM 2018 - Skyttekung"
   }
 
   /**
