@@ -1,10 +1,6 @@
 {
   "name": "wc2018-tournament-overview-widget",
-<<<<<<< HEAD
-  "version": "2.1.5-mrgreen2",
-=======
-  "version": "2.1.3-mrgreen4",
->>>>>>> v2.1.3-mrgreen4 fixed onWidgetRemoved not properly cleaning up the widget and fixed BlendedBackground not working in Edge
+  "version": "2.1.3-mrgreen5",
   "description": "Tournament Overview Widget",
   "main": "dist/index.html",
   "scripts": {
@@ -53,7 +49,7 @@
   "dependencies": {
     "kambi-offering-api-module": "^3.0.0",
     "kambi-widget-components": "1.21.9-mrgreen2",
-    "kambi-widget-core-library": "4.10.2-mrgreen2",
+    "kambi-widget-core-library": "4.10.2-mrgreen3",
     "prop-types": "^15.4.1"
   },
   "widgetCssVersion": "1.0.0.65"
