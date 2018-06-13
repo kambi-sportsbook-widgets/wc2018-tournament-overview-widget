@@ -13,13 +13,11 @@ import TournamentOverviewWidget from '../../src/js/Components/TournamentOverview
 let renderer
 
 const mockEvent = {
-  event: {
-    id: 100,
-    group: 'VM 2018',
-    groupId: 393929,
-    name: 'Mock name',
-    englishName: 'Mock english name',
-  },
+  id: 100,
+  group: 'VM 2018',
+  groupId: 393929,
+  name: 'Mock name',
+  englishName: 'Mock english name',
   liveData: {},
   betOffers: [{ id: 1, outcomes: [] }],
 }

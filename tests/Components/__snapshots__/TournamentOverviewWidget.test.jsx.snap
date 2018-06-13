@@ -4,9 +4,9 @@ exports[`TournamentOverviewWidget DOM rendering renders correctly in desktop mod
 "<div className=\\"widget\\">
   <BlendedBackground backgroundUrl=\\"some/fake/path.jpg\\" blendWithOperatorColor={false} />
   <div className=\\"topArea\\">
-    <List title=\\"VM 2018 - Mock name\\" handleClick={[Function: handleClick]} showNavLink={false} navText=\\"Translated showAllParticipants\\" />
+    <List title=\\"VM 2018 - nodejs\\" handleClick={[Function: handleClick]} showNavLink={false} navText=\\"Translated showAllParticipants\\" />
     <TournamentLogo logoUrl={[undefined]} logoName=\\"football\\" />
-    <List title=\\"VM 2018 - Mock name\\" handleClick={[Function: handleClick]} showNavLink={false} navText=\\"Translated showAllParticipants\\" />
+    <List title=\\"VM 2018 - nodejs\\" handleClick={[Function: handleClick]} showNavLink={false} navText=\\"Translated showAllParticipants\\" />
   </div>
   <ScrolledList renderPrevButton={[Function: renderPrevButton]} renderNextButton={[Function: renderNextButton]} renderItemContainer={[Function: renderItemContainer]} selected={0} scrollToItemMode=\\"to-left\\" showControls={true} step={2} alignItems=\\"center\\">
     <Event event={{...}} liveData={{...}} outcomes={{...}} homeFlag={{...}} awayFlag={{...}} isMobile={false} flagBaseUrl=\\"assets/icons/\\" />
@@ -49,7 +49,7 @@ exports[`TournamentOverviewWidget DOM rendering renders correctly with default p
       handleClick={[Function]}
       navText="Translated showAllParticipants"
       showNavLink={false}
-      title="VM 2018 - Mock name"
+      title="VM 2018 - nodejs"
     />
     <TournamentLogo
       logoName="football"
@@ -59,7 +59,7 @@ exports[`TournamentOverviewWidget DOM rendering renders correctly with default p
       handleClick={[Function]}
       navText="Translated showAllParticipants"
       showNavLink={false}
-      title="VM 2018 - Mock name"
+      title="VM 2018 - nodejs"
     />
   </div>
   <ScrolledList
@@ -76,10 +76,17 @@ exports[`TournamentOverviewWidget DOM rendering renders correctly with default p
       awayFlag={null}
       event={
         Object {
+          "betOffers": Array [
+            Object {
+              "id": 1,
+              "outcomes": Array [],
+            },
+          ],
           "englishName": "Mock english name",
           "group": "VM 2018",
           "groupId": 393929,
           "id": 100,
+          "liveData": Object {},
           "name": "Mock name",
         }
       }
@@ -108,7 +115,7 @@ exports[`TournamentOverviewWidget DOM rendering renders correctly with events 1`
       handleClick={[Function]}
       navText="Translated showAllParticipants"
       showNavLink={false}
-      title="VM 2018 - Mock name"
+      title="VM 2018 - nodejs"
     />
     <TournamentLogo
       logoName="football"
@@ -118,7 +125,7 @@ exports[`TournamentOverviewWidget DOM rendering renders correctly with events 1`
       handleClick={[Function]}
       navText="Translated showAllParticipants"
       showNavLink={false}
-      title="VM 2018 - Mock name"
+      title="VM 2018 - nodejs"
     />
   </div>
   <ScrolledList
@@ -135,10 +142,17 @@ exports[`TournamentOverviewWidget DOM rendering renders correctly with events 1`
       awayFlag={null}
       event={
         Object {
+          "betOffers": Array [
+            Object {
+              "id": 1,
+              "outcomes": Array [],
+            },
+          ],
           "englishName": "Mock english name",
           "group": "VM 2018",
           "groupId": 393929,
           "id": 100,
+          "liveData": Object {},
           "name": "Mock name",
         }
       }
@@ -167,7 +181,7 @@ exports[`TournamentOverviewWidget DOM rendering renders correctly with events an
       handleClick={[Function]}
       navText="Translated showAllParticipants"
       showNavLink={false}
-      title="VM 2018 - Mock name"
+      title="VM 2018 - nodejs"
     />
     <TournamentLogo
       logoName="football"
@@ -177,7 +191,7 @@ exports[`TournamentOverviewWidget DOM rendering renders correctly with events an
       handleClick={[Function]}
       navText="Translated showAllParticipants"
       showNavLink={false}
-      title="VM 2018 - Mock name"
+      title="VM 2018 - nodejs"
     />
   </div>
   <ScrolledList
@@ -194,10 +208,17 @@ exports[`TournamentOverviewWidget DOM rendering renders correctly with events an
       awayFlag={null}
       event={
         Object {
+          "betOffers": Array [
+            Object {
+              "id": 1,
+              "outcomes": Array [],
+            },
+          ],
           "englishName": "Mock english name",
           "group": "VM 2018",
           "groupId": 393929,
           "id": 100,
+          "liveData": Object {},
           "name": "Mock name",
         }
       }
@@ -226,7 +247,7 @@ exports[`TournamentOverviewWidget DOM rendering renders correctly with tournamen
       handleClick={[Function]}
       navText="Translated showAllParticipants"
       showNavLink={false}
-      title="VM 2018 - Mock name"
+      title="VM 2018 - nodejs"
     />
     <TournamentLogo
       logoName="football"
@@ -236,7 +257,7 @@ exports[`TournamentOverviewWidget DOM rendering renders correctly with tournamen
       handleClick={[Function]}
       navText="Translated showAllParticipants"
       showNavLink={false}
-      title="VM 2018 - Mock name"
+      title="VM 2018 - nodejs"
     />
   </div>
   <ScrolledList
@@ -253,10 +274,17 @@ exports[`TournamentOverviewWidget DOM rendering renders correctly with tournamen
       awayFlag={null}
       event={
         Object {
+          "betOffers": Array [
+            Object {
+              "id": 1,
+              "outcomes": Array [],
+            },
+          ],
           "englishName": "Mock english name",
           "group": "VM 2018",
           "groupId": 393929,
           "id": 100,
+          "liveData": Object {},
           "name": "Mock name",
         }
       }
