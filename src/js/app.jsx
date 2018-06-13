@@ -65,12 +65,8 @@ coreLibrary
         coreLibrary.args.onWidgetLoaded()
       }
     )
-    const originalOnWidgetRemoved = coreLibrary.args.onWidgetRemoved
-    coreLibrary.args.onWidgetRemoved = err => {
+    coreLibrary.cleanupWidget = () => {
       ReactDOM.unmountComponentAtNode(coreLibrary.rootElement)
-      if (originalOnWidgetRemoved) {
-        originalOnWidgetRemoved(err)
-      }
     }
   })
   .catch(err => {
