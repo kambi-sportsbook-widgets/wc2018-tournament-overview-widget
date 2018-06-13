@@ -1,11 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {
-  coreLibrary,
-  eventsModule,
-  widgetModule,
-} from 'kambi-widget-core-library'
-// import { setConfigValues } from 'kambi-offering-api-module'
+import { coreLibrary, widgetModule } from 'kambi-widget-core-library'
+import { setConfigValues } from 'kambi-offering-api-module'
 
 import kambi from './Services/kambi'
 import TournamentOverviewWidget from './Components/TournamentOverviewWidget'
@@ -33,23 +29,22 @@ coreLibrary
   })
   .then(() => {
     const { filter, leftWidgetInput, rightWidgetInput } = coreLibrary.args
-    /////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////
-    // USE LATER FOR V2018
     // set config values from coreLibrary
-    // setConfigValues({
-    //   ...coreLibrary.config,
-    //   ...{
-    //     apiBaseUrl: 'https://e1-api.aws.kambicdn.com/offering/{apiVersion}/',
-    //   },
-    // })
-    /////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////
+    setConfigValues({
+      ...coreLibrary.config,
+      ...{
+        apiBaseUrls: {
+          v2: 'https://e1-api.kambi.com/offering/api/v2/',
+          v3: 'https://e1-api.kambi.com/offering/api/v3/',
+          v2018: 'https://e1-api.aws.kambicdn.com/offering/v2018/',
+        },
+      },
+    })
 
     return kambi.getEvents(filter, leftWidgetInput, rightWidgetInput)
   })
   .then(({ events, competitions }) => {
-    const { filter, iconUrl, flagBaseUrl, backgroundUrl } = coreLibrary.args
+    const { iconUrl, flagBaseUrl, backgroundUrl } = coreLibrary.args
 
     ReactDOM.render(
       <TournamentOverviewWidget

@@ -75,14 +75,14 @@ class TournamentOverviewWidget extends Component {
    * event { shape } event containing betOffer and event metadata
    */
   navigateToEvent(event) {
-    if (event.event.liveBetOffers) {
+    if (event.liveBetOffers) {
       // Navigate to live event
       // http://kambi-sportsbook-widgets.github.io/widget-core-library/module-widgetModule.html#.navigateToLiveEvent__anchor
-      widgetModule.navigateToLiveEvent(event.event.id)
+      widgetModule.navigateToLiveEvent(event.id)
     } else {
       // Navigate to upcoming event
       // http://kambi-sportsbook-widgets.github.io/widget-core-library/module-widgetModule.html#.navigateToEvent__anchor
-      widgetModule.navigateToEvent(event.event.id)
+      widgetModule.navigateToEvent(event.id)
     }
   }
 
@@ -91,7 +91,7 @@ class TournamentOverviewWidget extends Component {
    * event { shape } contains event metadata
    */
   generateWidgetItemTitle(event) {
-    return `${event.group} - ${event.name.split('(')[0].trim()}` // e.g "WM 2018 - Skyttekung"
+    return `${event.group} - ${name.split('(')[0].trim()}` // e.g "WM 2018 - Skyttekung"
   }
 
   /**
@@ -121,7 +121,7 @@ class TournamentOverviewWidget extends Component {
   renderTopEvent(eventData, numberOfOutcomes = 3) {
     return (
       <List
-        title={this.generateWidgetItemTitle(eventData.event)}
+        title={this.generateWidgetItemTitle(eventData)}
         handleClick={() => this.navigateToEvent(eventData)}
         showNavLink={eventData.betOffers[0].outcomes.length > numberOfOutcomes}
         navText={t(
@@ -142,12 +142,12 @@ class TournamentOverviewWidget extends Component {
             if (
               countrySplit &&
               countrySplit.length > 1 &&
-              eventData.event.groupId === WORLD_CUP_2018_ID
+              eventData.groupId === WORLD_CUP_2018_ID
             ) {
               flagUrl = this.generateCountryFlagUrl(
                 countrySplit[1].slice(0, countrySplit[1].length - 1)
               )
-            } else if (eventData.event.groupId === WORLD_CUP_2018_ID) {
+            } else if (eventData.groupId === WORLD_CUP_2018_ID) {
               flagUrl = this.generateCountryFlagUrl(countrySplit[0])
             }
 
@@ -158,7 +158,7 @@ class TournamentOverviewWidget extends Component {
                 flagUrl={flagUrl}
                 fallbackFlagUrl={'../../assets/world_cup_2018.svg'}
                 outcome={outcome}
-                event={eventData.event}
+                event={eventData}
               />
             )
           })}
@@ -170,12 +170,12 @@ class TournamentOverviewWidget extends Component {
     return this.state.events
       .filter(event => event.betOffers.length > 0)
       .map(event => {
-        const countries = event.event.englishName.split(' - ')
-        const isWorldCup = event.event.groupId === WORLD_CUP_2018_ID
+        const countries = event.englishName.split(' - ')
+        const isWorldCup = event.groupId === WORLD_CUP_2018_ID
         return (
           <Event
-            key={event.event.id}
-            event={event.event}
+            key={event.id}
+            event={event}
             liveData={event.liveData}
             outcomes={event.betOffers[0].outcomes}
             homeFlag={

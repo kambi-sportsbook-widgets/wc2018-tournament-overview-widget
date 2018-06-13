@@ -1,5 +1,4 @@
-// import { getEventsByFilter, getEvent } from 'kambi-offering-api-module'
-import { offeringModule } from 'kambi-widget-core-library'
+import { getEventsByFilter, getEvent } from 'kambi-offering-api-module'
 
 /**
  * Fetches events by supplied filter
@@ -8,8 +7,8 @@ import { offeringModule } from 'kambi-widget-core-library'
  */
 const getEvents = (filter, leftWidgetInput, rightWidgetInput) => {
   const dataRequests = [
-    offeringModule.getEventsByFilter(filter), // tournament matches
-    offeringModule.getEventsByFilter(`${filter}/all/all/competitions`), // tournament competitions (e.g. golden boot, tournament winner etc.)
+    getEventsByFilter(filter), // tournament matches
+    getEventsByFilter(`${filter}/all/all/competitions`), // tournament competitions (e.g. golden boot, tournament winner etc.)
   ]
 
   return Promise.all(dataRequests)
@@ -26,12 +25,12 @@ const getEvents = (filter, leftWidgetInput, rightWidgetInput) => {
       let rightWidget
       tournamentCompetitions.forEach(competition => {
         competition.betOffers.forEach(betOffer => {
-          if (competition.event.id === leftWidgetInput.eventId) {
+          if (competition.id === leftWidgetInput.eventId) {
             if (betOffer.criterion.id === leftWidgetInput.criterionId) {
               leftWidget = competition
             }
             return
-          } else if (competition.event.id === rightWidgetInput.eventId) {
+          } else if (competition.id === rightWidgetInput.eventId) {
             if (betOffer.criterion.id === rightWidgetInput.criterionId) {
               rightWidget = competition
             }
@@ -50,7 +49,10 @@ const getEvents = (filter, leftWidgetInput, rightWidgetInput) => {
       const tournamentMatches = tournamentEvents.filter(event => {
         let isTournamentMatch = false
         event.betOffers.forEach(offer => {
-          if (offer.criterion.id === 1001159858 && offer.main) {
+          if (
+            offer.criterion.id === 1001159858 &&
+            offer.tags.indexOf('MAIN') !== -1
+          ) {
             isTournamentMatch = true
           }
         })
@@ -68,8 +70,7 @@ const getEvents = (filter, leftWidgetInput, rightWidgetInput) => {
 }
 
 export const getMatchEvents = filter => {
-  return offeringModule
-    .getEventsByFilter(filter)
+  return getEventsByFilter(filter)
     .then(tournamentData => {
       if (tournamentData == null) {
         throw new Error(
