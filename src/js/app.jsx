@@ -46,6 +46,10 @@ coreLibrary
   .then(({ events, competitions }) => {
     const { iconUrl, flagBaseUrl, backgroundUrl } = coreLibrary.args
 
+    coreLibrary.cleanupWidget = () => {
+      ReactDOM.unmountComponentAtNode(coreLibrary.rootElement)
+    }
+
     ReactDOM.render(
       <TournamentOverviewWidget
         competitions={competitions}
@@ -59,9 +63,6 @@ coreLibrary
         coreLibrary.args.onWidgetLoaded()
       }
     )
-    coreLibrary.cleanupWidget = () => {
-      ReactDOM.unmountComponentAtNode(coreLibrary.rootElement)
-    }
   })
   .catch(err => {
     console.error(err)
