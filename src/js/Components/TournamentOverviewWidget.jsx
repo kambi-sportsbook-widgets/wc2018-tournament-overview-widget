@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { coreLibrary } from 'kambi-widget-core-library'
 import { ScrolledList, BlendedBackground } from 'kambi-widget-components'
 
 import mobile from '../Services/mobile'
@@ -20,8 +21,6 @@ import ListItem from './ListItem'
  */
 const MOBILE_INITIAL_SCROLL_DELAY = 2000
 const WORLD_CUP_2018_ID = 2000075007
-const WIDGET_HEIGHT_DESKTOP = 370
-const WIDGET_HEIGHT_MOBILE = 150
 const DEFAULT_BACKGROUND =
   'https://d1fqgomuxh4f5p.cloudfront.net/tournamentdata/worldcup2018/overview-bw-bg-desktop.jpg'
 
@@ -39,7 +38,6 @@ class TournamentOverviewWidget extends Component {
       events: props.events,
       selected: 0,
       mobile: mobile(),
-      widgetHeight: mobile() ? WIDGET_HEIGHT_MOBILE : WIDGET_HEIGHT_DESKTOP,
       usingDefaultBackground: props.backgroundUrl === DEFAULT_BACKGROUND,
     }
   }
@@ -54,11 +52,8 @@ class TournamentOverviewWidget extends Component {
         MOBILE_INITIAL_SCROLL_DELAY
       )
     }
-    widgetModule.setWidgetHeight(this.state.widgetHeight)
-  }
-
-  componentDidUpdate() {
-    widgetModule.setWidgetHeight(this.state.widgetHeight)
+    const { height } = coreLibrary.rootElement.getBoundingClientRect()
+    widgetModule.setWidgetHeight(height)
   }
 
   /**
