@@ -44,12 +44,13 @@
     "prettier": "^1.10.2"
   },
   "devServer": {
-    "https": true
+    "https": false,
+    "port": 8083
   },
   "dependencies": {
     "kambi-offering-api-module": "^3.0.1",
     "kambi-widget-components": "1.21.9-mrgreen2",
-    "kambi-widget-core-library": "4.10.2-mrgreen5",
+    "kambi-widget-core-library": "4.10.2-mrgreen6",
     "prop-types": "^15.4.1"
   },
   "widgetCssVersion": "1.0.0.67"
