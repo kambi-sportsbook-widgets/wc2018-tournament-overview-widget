@@ -1,4 +1,4 @@
-import { getEventsByFilter, getEvent } from 'kambi-offering-api-module'
+import { getEventsByFilter } from 'kambi-offering-api-module'
 
 /**
  * Fetches events by supplied filter
