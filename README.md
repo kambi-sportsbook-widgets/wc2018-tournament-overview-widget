@@ -1,4 +1,4 @@
-# wc2018-tournament-overview-widget v2.1.8-mrgreen1
+# wc2018-tournament-overview-widget v2.1.9-mrgreen1
 
 A widget showing an overview of a tournament though a match schedule of upcoming matches in a scrollable list. The matches shown are based on the tournament (wc2018). The matches are ordered by their start date. The widget also shows two outright betoffers, defaulting to _Winner_ and _Golden Boot_.
 

@@ -1,4 +1,4 @@
-import { getEventsByFilter, getEvent } from 'kambi-offering-api-module'
+import { getEventsByFilter } from 'kambi-offering-api-module'
 
 /**
  * Fetches events by supplied filter
@@ -42,7 +42,6 @@ const getEvents = (filter, leftWidgetInput, rightWidgetInput) => {
 
       if (!leftWidget || !rightWidget) {
         throw new Error(`Could not find matching criterion IDs from data`)
-        return
       }
 
       // filter tournament events against main betoffer and correct criterion id as kambi sometimes adds other types of events to the same endpoint

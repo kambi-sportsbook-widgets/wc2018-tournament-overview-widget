@@ -36,10 +36,13 @@ class TournamentOverviewWidget extends Component {
 
     this.state = {
       events: props.events,
+      leftWidget: props.competitions.leftWidget,
+      rightWidget: props.competitions.rightWidget,
       selected: 0,
       mobile: mobile(),
       usingDefaultBackground: props.backgroundUrl === DEFAULT_BACKGROUND,
     }
+    this.pollEventTimer = null
   }
 
   /**
@@ -54,6 +57,47 @@ class TournamentOverviewWidget extends Component {
     }
     const { height } = coreLibrary.rootElement.getBoundingClientRect()
     widgetModule.setWidgetHeight(height)
+    this.startPollTimer()
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.pollEventTimer)
+  }
+
+  /**
+   * sets a timeout to poll more event data every minute
+   */
+  startPollTimer() {
+    this.pollEventTimer = setTimeout(() => this.pollEventData(), 60000)
+  }
+
+  /**
+   * gets event data and updates widget on success
+   */
+  pollEventData() {
+    clearTimeout(this.pollEventTimer)
+
+    const { filter, leftWidgetInput, rightWidgetInput } = coreLibrary.args
+
+    kambi
+      .getEvents(filter, leftWidgetInput, rightWidgetInput)
+      .then(res => {
+        const { events, competitions } = res
+        this.setState(
+          {
+            events,
+            leftWidget: competitions.leftWidget,
+            rightWidget: competitions.rightWidget,
+          },
+          () => {
+            this.startPollTimer()
+          }
+        )
+      })
+      .catch(err => {
+        console.error(err)
+        widgetModule.removeWidget(err)
+      })
   }
 
   /**
@@ -204,7 +248,7 @@ class TournamentOverviewWidget extends Component {
    * @returns {XML}
    */
   render() {
-    const { leftWidget, rightWidget } = this.props.competitions
+    const { leftWidget, rightWidget } = this.state
 
     return (
       <div className={styles.widget}>
