@@ -79,19 +79,25 @@ class TournamentOverviewWidget extends Component {
 
     const { filter, leftWidgetInput, rightWidgetInput } = coreLibrary.args
 
-    kambi.getEvents(filter, leftWidgetInput, rightWidgetInput).then(res => {
-      const { events, competitions } = res
-      this.setState(
-        {
-          events,
-          leftWidget: competitions.leftWidget,
-          rightWidget: competitions.rightWidget,
-        },
-        () => {
-          this.startPollTimer()
-        }
-      )
-    })
+    kambi
+      .getEvents(filter, leftWidgetInput, rightWidgetInput)
+      .then(res => {
+        const { events, competitions } = res
+        this.setState(
+          {
+            events,
+            leftWidget: competitions.leftWidget,
+            rightWidget: competitions.rightWidget,
+          },
+          () => {
+            this.startPollTimer()
+          }
+        )
+      })
+      .catch(err => {
+        console.error(err)
+        widgetModule.removeWidget(err)
+      })
   }
 
   /**
