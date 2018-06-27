@@ -52,5 +52,5 @@
     "kambi-widget-core-library": "^4.9.1",
     "prop-types": "^15.4.1"
   },
-  "widgetCssVersion": "1.0.0.67"
+  "widgetCssVersion": "1.0.0.68"
 }
