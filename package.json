@@ -1,6 +1,6 @@
 {
   "name": "wc2018-tournament-overview-widget",
-  "version": "2.1.9-mrgreen1",
+  "version": "2.1.11-mrgreen1",
   "description": "Tournament Overview Widget",
   "main": "dist/index.html",
   "scripts": {
@@ -53,5 +53,5 @@
     "kambi-widget-core-library": "4.10.2-mrgreen6",
     "prop-types": "^15.4.1"
   },
-  "widgetCssVersion": "1.0.0.67"
+  "widgetCssVersion": "1.0.0.68"
 }

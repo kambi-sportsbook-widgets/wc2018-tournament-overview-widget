@@ -141,15 +141,17 @@ class Event extends Component {
         </div>
         <div className={`${styles.outcomes}`}>
           {!this.props.liveData &&
-            this.props.outcomes.map(outcome => (
-              <OutcomeButton
-                key={outcome.id}
-                outcome={outcome}
-                event={this.props.event}
-                outlineStyle={true}
-                updateOdds={false}
-              />
-            ))}
+            this.props.outcomes
+              .filter(outcome => outcome.odds !== undefined)
+              .map(outcome => (
+                <OutcomeButton
+                  key={outcome.id}
+                  outcome={outcome}
+                  event={this.props.event}
+                  outlineStyle={true}
+                  updateOdds={false}
+                />
+              ))}
 
           {this.props.liveData && (
             <OutcomeButtonUI
