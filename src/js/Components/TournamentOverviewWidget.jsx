@@ -158,20 +158,18 @@ class TournamentOverviewWidget extends Component {
    * numberOfOutcomes { number } how many outcomes we want the widget to render
    */
   renderTopEvent(eventData, numberOfOutcomes = 3) {
+    // filter out outcomes without odds returned (when Kambi suspend outcomes the outcome is returned without odds resulting in `NaN` if we don't filter them out)
+    const outcomesWithOdds = eventData.betOffers[0].outcomes.filter(
+      outcome => outcome.odds !== undefined
+    )
     return (
       <List
         title={this.generateWidgetItemTitle(eventData)}
         handleClick={() => this.navigateToEvent(eventData)}
-        showNavLink={eventData.betOffers[0].outcomes.length > numberOfOutcomes}
-        navText={t(
-          'showAllParticipants',
-          eventData.betOffers[0].outcomes.length
-        )}
+        showNavLink={outcomesWithOdds.length > numberOfOutcomes}
+        navText={t('showAllParticipants', outcomesWithOdds.length)}
       >
-        {this.sortOutcomesByLowestOdds(
-          eventData.betOffers[0].outcomes,
-          numberOfOutcomes
-        )
+        {this.sortOutcomesByLowestOdds(outcomesWithOdds, numberOfOutcomes)
           .slice(0, numberOfOutcomes)
           .map(outcome => {
             let flagUrl = null
